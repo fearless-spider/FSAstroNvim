@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>core.utils.git</strong></li>
+  <li><a href="../modules/core.utils.html">core.utils</a></li>
+  <li><a href="../modules/core.utils.updater.html">core.utils.updater</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/init.lua.html">init.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>core.utils.git</code></h1>
+<p>
+<h3>Git LUA API</h3>
+</p>
+<p> This module can be loaded with <code>local git = require &quot;core.utils.git&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2022</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#cmd">cmd(args)</a></td>
+	<td class="summary">Run a git command from the AstroNvim installation directory</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_repo">is_repo()</a></td>
+	<td class="summary">Check if the AstroNvim home is a git repo</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fetch">fetch(remote)</a></td>
+	<td class="summary">Fetch git remote</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pull">pull(...)</a></td>
+	<td class="summary">Pull the git repo</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkout">checkout(dest)</a></td>
+	<td class="summary">Checkout git target</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hard_reset">hard_reset(dest)</a></td>
+	<td class="summary">Hard reset to a git target</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#branch_contains">branch_contains(remote, branch, commit)</a></td>
+	<td class="summary">Check if a branch contains a commit</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#remote_add">remote_add(remote, url)</a></td>
+	<td class="summary">Add a git remote</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#remote_update">remote_update(remote, url)</a></td>
+	<td class="summary">Update a git remote URL</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#remote_url">remote_url(remote)</a></td>
+	<td class="summary">Get the URL of a given git remote</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#current_version">current_version(...)</a></td>
+	<td class="summary">Get the current version with git describe including tags</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#current_branch">current_branch(...)</a></td>
+	<td class="summary">Get the current branch</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#local_head">local_head(...)</a></td>
+	<td class="summary">Get the current head of the git repo</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#remote_head">remote_head(remote, branch)</a></td>
+	<td class="summary">Get the current head of a git remote</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#tag_commit">tag_commit(tag)</a></td>
+	<td class="summary">Get the commit hash of a given tag</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_commit_range">get_commit_range(start_hash, end_hash)</a></td>
+	<td class="summary">Get the commit log between two commit hashes</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_versions">get_versions(search)</a></td>
+	<td class="summary">Get a list of all tags with a regex filter</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#latest_version">latest_version(versions)</a></td>
+	<td class="summary">Get the latest version of a list of versions</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#parse_remote_url">parse_remote_url(str)</a></td>
+	<td class="summary">Parse a remote url</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#breaking_changes">breaking_changes(commits)</a></td>
+	<td class="summary">Get a list of breaking commits from commit messages using Conventional Commit standard</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pretty_changelog">pretty_changelog(commits)</a></td>
+	<td class="summary">Generate a table of commit messages for neovim's echo API with highlighting</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "cmd"></a>
+    <strong>cmd(args)</strong>
+    </dt>
+    <dd>
+    Run a git command from the AstroNvim installation directory
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">args</span>
+         the git arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command or nil if unsuccessful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_repo"></a>
+    <strong>is_repo()</strong>
+    </dt>
+    <dd>
+    Check if the AstroNvim home is a git repo
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fetch"></a>
+    <strong>fetch(remote)</strong>
+    </dt>
+    <dd>
+    Fetch git remote
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">remote</span>
+         the remote to fetch
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pull"></a>
+    <strong>pull(...)</strong>
+    </dt>
+    <dd>
+    Pull the git repo
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkout"></a>
+    <strong>checkout(dest)</strong>
+    </dt>
+    <dd>
+    Checkout git target
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dest</span>
+         the target to checkout
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hard_reset"></a>
+    <strong>hard_reset(dest)</strong>
+    </dt>
+    <dd>
+    Hard reset to a git target
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dest</span>
+         the target to hard reset to
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "branch_contains"></a>
+    <strong>branch_contains(remote, branch, commit)</strong>
+    </dt>
+    <dd>
+    Check if a branch contains a commit
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">remote</span>
+         the git remote to check
+        </li>
+        <li><span class="parameter">branch</span>
+         the git branch to check
+        </li>
+        <li><span class="parameter">commit</span>
+         the git commit to check for
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "remote_add"></a>
+    <strong>remote_add(remote, url)</strong>
+    </dt>
+    <dd>
+    Add a git remote
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">remote</span>
+         the remote to add
+        </li>
+        <li><span class="parameter">url</span>
+         the url of the remote
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "remote_update"></a>
+    <strong>remote_update(remote, url)</strong>
+    </dt>
+    <dd>
+    Update a git remote URL
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">remote</span>
+         the remote to update
+        </li>
+        <li><span class="parameter">url</span>
+         the new URL of the remote
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result of the command
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "remote_url"></a>
+    <strong>remote_url(remote)</strong>
+    </dt>
+    <dd>
+    Get the URL of a given git remote
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">remote</span>
+         the remote to get the URL of
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the url of the remote
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "current_version"></a>
+    <strong>current_version(...)</strong>
+    </dt>
+    <dd>
+    Get the current version with git describe including tags
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the current git describe string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "current_branch"></a>
+    <strong>current_branch(...)</strong>
+    </dt>
+    <dd>
+    Get the current branch
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the branch of the AstroNvim installation
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "local_head"></a>
+    <strong>local_head(...)</strong>
+    </dt>
+    <dd>
+    Get the current head of the git repo
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the head string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "remote_head"></a>
+    <strong>remote_head(remote, branch)</strong>
+    </dt>
+    <dd>
+    Get the current head of a git remote
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">remote</span>
+         the remote to check
+        </li>
+        <li><span class="parameter">branch</span>
+         the branch to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the head string of the remote branch
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tag_commit"></a>
+    <strong>tag_commit(tag)</strong>
+    </dt>
+    <dd>
+    Get the commit hash of a given tag
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tag</span>
+         the tag to resolve
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the commit hash of a git tag
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_commit_range"></a>
+    <strong>get_commit_range(start_hash, end_hash)</strong>
+    </dt>
+    <dd>
+    Get the commit log between two commit hashes
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_hash</span>
+         the start commit hash
+        </li>
+        <li><span class="parameter">end_hash</span>
+         the end commit hash
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        an array like table of commit messages
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_versions"></a>
+    <strong>get_versions(search)</strong>
+    </dt>
+    <dd>
+    Get a list of all tags with a regex filter
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">search</span>
+         a regex to search the tags with (defaults to "v*" for version tags)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        an array like table of tags that match the search
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "latest_version"></a>
+    <strong>latest_version(versions)</strong>
+    </dt>
+    <dd>
+    Get the latest version of a list of versions
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">versions</span>
+         a list of versions to search (defaults to all versions available)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the latest version from the array
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "parse_remote_url"></a>
+    <strong>parse_remote_url(str)</strong>
+    </dt>
+    <dd>
+    Parse a remote url
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         the remote to parse to a full git url
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the full git url for the given remote string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "breaking_changes"></a>
+    <strong>breaking_changes(commits)</strong>
+    </dt>
+    <dd>
+    Get a list of breaking commits from commit messages using Conventional Commit standard
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">commits</span>
+         an array like table of commit messages
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        an array like table of commits that are breaking
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pretty_changelog"></a>
+    <strong>pretty_changelog(commits)</strong>
+    </dt>
+    <dd>
+    Generate a table of commit messages for neovim's echo API with highlighting
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">commits</span>
+         an array like table of commit messages
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        an array like table of echo messages to provide to nvim_echo or astronvim.echo
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-08-12 08:16:30 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
