@@ -258,39 +258,40 @@
     <span class="comment">-- All other entries override the require("&lt;key&gt;").setup({...}) call for default plugins
 </span>    [<span class="string">"null-ls"</span>] = <span class="keyword">function</span>(config) <span class="comment">-- overrides <code>require(&quot;null-ls&quot;).setup(config)</code>
 </span>      <span class="comment">-- config variable is the default configuration table for the setup functino call
-</span>      <span class="keyword">local</span> null_ls = <span class="global">require</span> <span class="string">"null-ls"</span>
+</span>      <span class="comment">-- local null_ls = require "null-ls"
+</span>
       <span class="comment">-- Check supported formatters and linters
 </span>      <span class="comment">-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 </span>      <span class="comment">-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 </span>      config.sources = {
         <span class="comment">-- Set a formatter
-</span>        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.prettier,
-      }
+</span>        <span class="comment">-- null_ls.builtins.formatting.stylua,
+</span>        <span class="comment">-- null_ls.builtins.formatting.prettier,
+</span>      }
       <span class="comment">-- set up null-ls's on_attach function
-</span>      <span class="comment">-- NOTE: You can remove this on attach function to disable format on save
-</span>      config.on_attach = <span class="keyword">function</span>(client)
-        <span class="keyword">if</span> client.resolved_capabilities.document_formatting <span class="keyword">then</span>
-          vim.api.nvim_create_autocmd(<span class="string">"BufWritePre"</span>, {
-            desc = <span class="string">"Auto format before save"</span>,
-            pattern = <span class="string">"&lt;buffer&gt;"</span>,
-            callback = vim.lsp.buf.formatting_sync,
-          })
-        <span class="keyword">end</span>
-      <span class="keyword">end</span>
-      <span class="keyword">return</span> config <span class="comment">-- return final config table to use in require("null-ls").setup(config)
+</span>      <span class="comment">-- NOTE: You can uncomment this on attach function to enable format on save
+</span>      <span class="comment">-- config.on_attach = function(client)
+</span>      <span class="comment">--   if client.resolved_capabilities.document_formatting then
+</span>      <span class="comment">--     vim.api.nvim_create_autocmd("BufWritePre", {
+</span>      <span class="comment">--       desc = "Auto format before save",
+</span>      <span class="comment">--       pattern = "&lt;buffer&gt;",
+</span>      <span class="comment">--       callback = vim.lsp.buf.formatting_sync,
+</span>      <span class="comment">--     })
+</span>      <span class="comment">--   end
+</span>      <span class="comment">-- end
+</span>      <span class="keyword">return</span> config <span class="comment">-- return final config table to use in require("null-ls").setup(config)
 </span>    <span class="keyword">end</span>,
     treesitter = { <span class="comment">-- overrides <code>require(&quot;treesitter&quot;).setup(...)</code>
-</span>      ensure_installed = { <span class="string">"lua"</span> },
-    },
+</span>      <span class="comment">-- ensure_installed = { "lua" },
+</span>    },
     <span class="comment">-- use mason-lspconfig to configure LSP installations
 </span>    [<span class="string">"mason-lspconfig"</span>] = { <span class="comment">-- overrides <code>require(&quot;mason-lspconfig&quot;).setup(...)</code>
-</span>      ensure_installed = { <span class="string">"sumneko_lua"</span> },
-    },
+</span>      <span class="comment">-- ensure_installed = { "sumneko_lua" },
+</span>    },
     <span class="comment">-- use mason-tool-installer to configure DAP/Formatters/Linter installation
 </span>    [<span class="string">"mason-tool-installer"</span>] = { <span class="comment">-- overrides <code>require(&quot;mason-tool-installer&quot;).setup(...)</code>
-</span>      ensure_installed = { <span class="string">"prettier"</span>, <span class="string">"stylua"</span> },
-    },
+</span>      <span class="comment">-- ensure_installed = { "prettier", "stylua" },
+</span>    },
     packer = { <span class="comment">-- overrides <code>require(&quot;packer&quot;).setup(...)</code>
 </span>      compile_path = vim.fn.stdpath <span class="string">"data"</span> .. <span class="string">"/packer_compiled.lua"</span>,
     },
@@ -343,14 +344,14 @@
 </span>  polish = <span class="keyword">function</span>()
     <span class="comment">-- Set key binding
 </span>    <span class="comment">-- Set autocommands
-</span>    vim.api.nvim_create_augroup(<span class="string">"packer_conf"</span>, { clear = <span class="keyword">true</span> })
-    vim.api.nvim_create_autocmd(<span class="string">"BufWritePost"</span>, {
-      desc = <span class="string">"Sync packer after modifying plugins.lua"</span>,
-      group = <span class="string">"packer_conf"</span>,
-      pattern = <span class="string">"plugins.lua"</span>,
-      command = <span class="string">"source &lt;afile&gt; | PackerSync"</span>,
-    })
-
+</span>    <span class="comment">-- vim.api.nvim_create_augroup("packer_conf", { clear = true })
+</span>    <span class="comment">-- vim.api.nvim_create_autocmd("BufWritePost", {
+</span>    <span class="comment">--   desc = "Sync packer after modifying plugins.lua",
+</span>    <span class="comment">--   group = "packer_conf",
+</span>    <span class="comment">--   pattern = "plugins.lua",
+</span>    <span class="comment">--   command = "source &lt;afile&gt; | PackerSync",
+</span>    <span class="comment">-- })
+</span>
     <span class="comment">-- Set up custom filetypes
 </span>    <span class="comment">-- vim.filetype.add {
 </span>    <span class="comment">--   extension = {
@@ -373,7 +374,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-09-12 13:13:59 </i>
+<i style="float:right;">Last updated 2022-10-04 13:53:42 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
