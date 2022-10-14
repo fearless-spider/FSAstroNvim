@@ -40,6 +40,9 @@
 <ul class="nowrap">
   <li><a href="../modules/core.utils.git.html">core.utils.git</a></li>
   <li><a href="../modules/core.utils.html">core.utils</a></li>
+  <li><a href="../modules/core.utils.lsp.html">core.utils.lsp</a></li>
+  <li><a href="../modules/core.utils.status.html">core.utils.status</a></li>
+  <li><a href="../modules/core.utils.ui.html">core.utils.ui</a></li>
   <li><a href="../modules/core.utils.updater.html">core.utils.updater</a></li>
 </ul>
 
@@ -79,26 +82,32 @@
   <span class="comment">-- Set colorscheme to use
 </span>  colorscheme = <span class="string">"default_theme"</span>,
 
-  <span class="comment">-- Override highlight groups in any theme
+  <span class="comment">-- Add highlight groups in any theme
 </span>  highlights = {
-    <span class="comment">-- duskfox = { -- a table of overrides/changes to the default
+    <span class="comment">-- init = { -- this table overrides highlights in all themes
+</span>    <span class="comment">--   Normal = { bg = "#000000" },
+</span>    <span class="comment">-- }
+</span>    <span class="comment">-- duskfox = { -- a table of overrides/changes to the duskfox theme
 </span>    <span class="comment">--   Normal = { bg = "#000000" },
 </span>    <span class="comment">-- },
-</span>    default_theme = <span class="keyword">function</span>(highlights) <span class="comment">-- or a function that returns a new table of colors to set
-</span>      <span class="keyword">local</span> C = <span class="global">require</span> <span class="string">"default_theme.colors"</span>
-
-      highlights.Normal = { fg = C.fg, bg = C.bg }
-      <span class="keyword">return</span> highlights
-    <span class="keyword">end</span>,
-  },
+</span>  },
 
   <span class="comment">-- set vim options here (vim.&lt;first_key&gt;.&lt;second_key&gt; =  value)
 </span>  options = {
     opt = {
-      relativenumber = <span class="keyword">true</span>, <span class="comment">-- sets vim.opt.relativenumber
+      <span class="comment">-- set to true or false etc.
+</span>      relativenumber = <span class="keyword">true</span>, <span class="comment">-- sets vim.opt.relativenumber
+</span>      number = <span class="keyword">true</span>, <span class="comment">-- sets vim.opt.number
+</span>      spell = <span class="keyword">false</span>, <span class="comment">-- sets vim.opt.spell
+</span>      signcolumn = <span class="string">"auto"</span>, <span class="comment">-- sets vim.opt.signcolumn to auto
+</span>      wrap = <span class="keyword">false</span>, <span class="comment">-- sets vim.opt.wrap
 </span>    },
     g = {
       mapleader = <span class="string">" "</span>, <span class="comment">-- sets vim.g.mapleader
+</span>      cmp_enabled = <span class="keyword">true</span>, <span class="comment">-- enable completion at start
+</span>      autopairs_enabled = <span class="keyword">true</span>, <span class="comment">-- enable autopairs at start
+</span>      diagnostics_enabled = <span class="keyword">true</span>, <span class="comment">-- enable diagnostics at start
+</span>      status_diagnostics_enabled = <span class="keyword">true</span>, <span class="comment">-- enable diagnostics in statusline
 </span>    },
   },
   <span class="comment">-- If you need more control, you can use the function()...end notation
@@ -128,13 +137,24 @@
 
   <span class="comment">-- Default theme configuration
 </span>  default_theme = {
-    <span class="comment">-- set the highlight style for diagnostic messages
-</span>    diagnostics_style = { italic = <span class="keyword">true</span> },
     <span class="comment">-- Modify the color palette for the default theme
 </span>    colors = {
       fg = <span class="string">"#abb2bf"</span>,
       bg = <span class="string">"#1e222a"</span>,
     },
+    highlights = <span class="keyword">function</span>(hl) <span class="comment">-- or a function that returns a new table of colors to set
+</span>      <span class="keyword">local</span> C = <span class="global">require</span> <span class="string">"default_theme.colors"</span>
+
+      hl.Normal = { fg = C.fg, bg = C.bg }
+
+      <span class="comment">-- New approach instead of diagnostic_style
+</span>      hl.DiagnosticError.italic = <span class="keyword">true</span>
+      hl.DiagnosticHint.italic = <span class="keyword">true</span>
+      hl.DiagnosticInfo.italic = <span class="keyword">true</span>
+      hl.DiagnosticWarn.italic = <span class="keyword">true</span>
+
+      <span class="keyword">return</span> hl
+    <span class="keyword">end</span>,
     <span class="comment">-- enable or disable highlighting for extra plugins
 </span>    plugins = {
       aerial = <span class="keyword">true</span>,
@@ -157,7 +177,7 @@
     },
   },
 
-  <span class="comment">-- Diagnostics configuration (for vim.diagnostics.config({...}))
+  <span class="comment">-- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
 </span>  diagnostics = {
     virtual_text = <span class="keyword">true</span>,
     underline = <span class="keyword">true</span>,
@@ -168,6 +188,15 @@
     <span class="comment">-- enable servers that you already have installed without mason
 </span>    servers = {
       <span class="comment">-- "pyright"
+</span>    },
+    formatting = {
+      format_on_save = <span class="keyword">true</span>, <span class="comment">-- enable or disable auto formatting on save
+</span>      disabled = { <span class="comment">-- disable formatting capabilities for the listed clients
+</span>        <span class="comment">-- "sumneko_lua",
+</span>      },
+      <span class="comment">-- filter = function(client) -- fully override the default formatting function
+</span>      <span class="comment">--   return true
+</span>      <span class="comment">-- end
 </span>    },
     <span class="comment">-- easily add or disable built in mappings added during LSP attaching
 </span>    mappings = {
@@ -198,12 +227,6 @@
 </span>      <span class="comment">--     },
 </span>      <span class="comment">--   },
 </span>      <span class="comment">-- },
-</span>      <span class="comment">-- Example disabling formatting for a specific language server
-</span>      <span class="comment">-- gopls = { -- override table for require("lspconfig").gopls.setup({...})
-</span>      <span class="comment">--   on_attach = function(client, bufnr)
-</span>      <span class="comment">--     client.resolved_capabilities.document_formatting = false
-</span>      <span class="comment">--   end
-</span>      <span class="comment">-- }
 </span>    },
   },
 
@@ -257,7 +280,7 @@
 </span>    },
     <span class="comment">-- All other entries override the require("&lt;key&gt;").setup({...}) call for default plugins
 </span>    [<span class="string">"null-ls"</span>] = <span class="keyword">function</span>(config) <span class="comment">-- overrides <code>require(&quot;null-ls&quot;).setup(config)</code>
-</span>      <span class="comment">-- config variable is the default configuration table for the setup functino call
+</span>      <span class="comment">-- config variable is the default configuration table for the setup function call
 </span>      <span class="comment">-- local null_ls = require "null-ls"
 </span>
       <span class="comment">-- Check supported formatters and linters
@@ -268,18 +291,7 @@
 </span>        <span class="comment">-- null_ls.builtins.formatting.stylua,
 </span>        <span class="comment">-- null_ls.builtins.formatting.prettier,
 </span>      }
-      <span class="comment">-- set up null-ls's on_attach function
-</span>      <span class="comment">-- NOTE: You can uncomment this on attach function to enable format on save
-</span>      <span class="comment">-- config.on_attach = function(client)
-</span>      <span class="comment">--   if client.resolved_capabilities.document_formatting then
-</span>      <span class="comment">--     vim.api.nvim_create_autocmd("BufWritePre", {
-</span>      <span class="comment">--       desc = "Auto format before save",
-</span>      <span class="comment">--       pattern = "&lt;buffer&gt;",
-</span>      <span class="comment">--       callback = vim.lsp.buf.formatting_sync,
-</span>      <span class="comment">--     })
-</span>      <span class="comment">--   end
-</span>      <span class="comment">-- end
-</span>      <span class="keyword">return</span> config <span class="comment">-- return final config table to use in require("null-ls").setup(config)
+      <span class="keyword">return</span> config <span class="comment">-- return final config table
 </span>    <span class="keyword">end</span>,
     treesitter = { <span class="comment">-- overrides <code>require(&quot;treesitter&quot;).setup(...)</code>
 </span>      <span class="comment">-- ensure_installed = { "lua" },
@@ -288,13 +300,10 @@
 </span>    [<span class="string">"mason-lspconfig"</span>] = { <span class="comment">-- overrides <code>require(&quot;mason-lspconfig&quot;).setup(...)</code>
 </span>      <span class="comment">-- ensure_installed = { "sumneko_lua" },
 </span>    },
-    <span class="comment">-- use mason-tool-installer to configure DAP/Formatters/Linter installation
-</span>    [<span class="string">"mason-tool-installer"</span>] = { <span class="comment">-- overrides <code>require(&quot;mason-tool-installer&quot;).setup(...)</code>
+    <span class="comment">-- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
+</span>    [<span class="string">"mason-null-ls"</span>] = { <span class="comment">-- overrides <code>require(&quot;mason-null-ls&quot;).setup(...)</code>
 </span>      <span class="comment">-- ensure_installed = { "prettier", "stylua" },
 </span>    },
-    packer = { <span class="comment">-- overrides <code>require(&quot;packer&quot;).setup(...)</code>
-</span>      compile_path = vim.fn.stdpath <span class="string">"data"</span> .. <span class="string">"/packer_compiled.lua"</span>,
-    },
   },
 
   <span class="comment">-- LuaSnip Options
@@ -303,8 +312,8 @@
 </span>    vscode_snippet_paths = {},
     <span class="comment">-- Extend filetypes
 </span>    filetype_extend = {
-      javascript = { <span class="string">"javascriptreact"</span> },
-    },
+      <span class="comment">-- javascript = { "javascriptreact" },
+</span>    },
   },
 
   <span class="comment">-- CMP Source Priorities
@@ -325,7 +334,7 @@
   <span class="comment">-- Modify which-key registration (Use this with mappings table in the above.)
 </span>  [<span class="string">"which-key"</span>] = {
     <span class="comment">-- Add bindings which show up as group name
-</span>    register_mappings = {
+</span>    register = {
       <span class="comment">-- first key is the mode, n == normal mode
 </span>      n = {
         <span class="comment">-- second key is the prefix, &lt;leader&gt; prefixes
@@ -342,16 +351,6 @@
 </span>  <span class="comment">-- augroups/autocommands and custom filetypes also this just pure lua so
 </span>  <span class="comment">-- anything that doesn't fit in the normal config locations above can go here
 </span>  polish = <span class="keyword">function</span>()
-    <span class="comment">-- Set key binding
-</span>    <span class="comment">-- Set autocommands
-</span>    <span class="comment">-- vim.api.nvim_create_augroup("packer_conf", { clear = true })
-</span>    <span class="comment">-- vim.api.nvim_create_autocmd("BufWritePost", {
-</span>    <span class="comment">--   desc = "Sync packer after modifying plugins.lua",
-</span>    <span class="comment">--   group = "packer_conf",
-</span>    <span class="comment">--   pattern = "plugins.lua",
-</span>    <span class="comment">--   command = "source &lt;afile&gt; | PackerSync",
-</span>    <span class="comment">-- })
-</span>
     <span class="comment">-- Set up custom filetypes
 </span>    <span class="comment">-- vim.filetype.add {
 </span>    <span class="comment">--   extension = {
@@ -374,7 +373,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-10-04 13:53:42 </i>
+<i style="float:right;">Last updated 2022-10-14 01:51:53 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
