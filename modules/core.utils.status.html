@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
 </ul>
 
 
@@ -103,12 +104,12 @@
 	<td class="summary">A provider function for showing if spellcheck is on</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.provider.paste">astronvim.status.provider.paste(opts)</a></td>
-	<td class="summary">A provider function for showing if paste is enabled</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.provider.macro_recording">astronvim.status.provider.macro_recording(opts)</a></td>
 	<td class="summary">A provider function for displaying if a macro is currently being recorded</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.provider.search_count">astronvim.status.provider.search_count(opts)</a></td>
+	<td class="summary">A provider function for displaying the current search count</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.provider.mode_text">astronvim.status.provider.mode_text(opts)</a></td>
@@ -195,6 +196,10 @@
 	<td class="summary">A condition function if a macro is being recorded</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.condition.is_hlsearch">astronvim.status.condition.is_hlsearch()</a></td>
+	<td class="summary">A condition function if search is visible</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.condition.is_git_repo">astronvim.status.condition.is_git_repo()</a></td>
 	<td class="summary">A condition function if the current file is in a git repo</td>
 	</tr>
@@ -251,6 +256,10 @@
 	<td class="summary">A function to build a set of children components for a macro recording section</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.component.cmd_info">astronvim.status.component.cmd_info(opts)</a></td>
+	<td class="summary">A function to build a set of children components for information shown in the cmdline</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.component.mode">astronvim.status.component.mode(opts)</a></td>
 	<td class="summary">A function to build a set of children components for a mode section</td>
 	</tr>
@@ -283,6 +292,14 @@
 	<td class="summary">A general function to build a section of astronvim status providers with highlights, conditions, and section surrounding</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.utils.build_provider">astronvim.status.utils.build_provider(opts, provider)</a></td>
+	<td class="summary">Convert a component parameter table to a table that can be used with the component builder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.utils.setup_providers">astronvim.status.utils.setup_providers(opts, providers, setup)</a></td>
+	<td class="summary">Convert key/value table of options to an array of providers for the component builder</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.utils.width">astronvim.status.utils.width(is_winbar)</a></td>
 	<td class="summary">A utility function to get the width of the bar</td>
 	</tr>
@@ -309,6 +326,13 @@
 	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.utils.decode_pos">astronvim.status.utils.decode_pos(c)</a></td>
 	<td class="summary">Decode a previously encoded position to it's sub parts</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#opts">opts</a></td>
+	<td class="summary">A provider function for showing if paste is enabled</td>
 	</tr>
 </table>
 
@@ -539,39 +563,6 @@
 
 </dd>
     <dt>
-    <a name = "astronvim.status.provider.paste"></a>
-    <strong>astronvim.status.provider.paste(opts)</strong>
-    </dt>
-    <dd>
-    A provider function for showing if paste is enabled
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">opts</span>
-         options passed to the stylize function
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        the function for outputting if paste is enabled
-    </ol>
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/core.utils.status.html#astronvim.status.utils.stylize">astronvim.status.utils.stylize</a>
-    </ul>
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = astronvim.status.provider.paste() }</pre>
-    </ul>
-
-</dd>
-    <dt>
     <a name = "astronvim.status.provider.macro_recording"></a>
     <strong>astronvim.status.provider.macro_recording(opts)</strong>
     </dt>
@@ -601,6 +592,39 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> heirline_component = { provider = astronvim.status.provider.macro_recording() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "astronvim.status.provider.search_count"></a>
+    <strong>astronvim.status.provider.search_count(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying the current search count
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for <code>vim.fn.searchcount</code> and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a function that returns a string of the current search location
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/core.utils.status.html#astronvim.status.utils.stylize">astronvim.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = astronvim.status.provider.search_count() }</pre>
     </ul>
 
 </dd>
@@ -648,7 +672,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">opts</span>
-         options passed to the stylize function
+         options for Top/Bot text, fixed width, and options passed to the stylize function
         </li>
     </ul>
 
@@ -1276,6 +1300,29 @@
 
 </dd>
     <dt>
+    <a name = "astronvim.status.condition.is_hlsearch"></a>
+    <strong>astronvim.status.condition.is_hlsearch()</strong>
+    </dt>
+    <dd>
+    A condition function if search is visible
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not searching is currently visible
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = astronvim.status.condition.is_hlsearch }</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "astronvim.status.condition.is_git_repo"></a>
     <strong>astronvim.status.condition.is_git_repo()</strong>
     </dt>
@@ -1636,7 +1683,37 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = astronvim.status.component.macro_recording()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = astronvim.status.component.macro_recording()
+ TODO: deprecate on <span class="global">next</span> major version release</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "astronvim.status.component.cmd_info"></a>
+    <strong>astronvim.status.component.cmd_info(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for information shown in the cmdline
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring macro recording, search count, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = astronvim.status.component.cmd_info()</pre>
     </ul>
 
 </dd>
@@ -1873,6 +1950,65 @@
 
 </dd>
     <dt>
+    <a name = "astronvim.status.utils.build_provider"></a>
+    <strong>astronvim.status.utils.build_provider(opts, provider)</strong>
+    </dt>
+    <dd>
+    Convert a component parameter table to a table that can be used with the component builder
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         a table of provider options
+        </li>
+        <li><span class="parameter">provider</span>
+         a provider in <code>astronvim.status.providers</code>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the provider table that can be used in <a href="../modules/core.utils.status.html#astronvim.status.component.builder">astronvim.status.component.builder</a>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "astronvim.status.utils.setup_providers"></a>
+    <strong>astronvim.status.utils.setup_providers(opts, providers, setup)</strong>
+    </dt>
+    <dd>
+    Convert key/value table of options to an array of providers for the component builder
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         the table of options for the components
+        </li>
+        <li><span class="parameter">providers</span>
+         an ordered list like array of providers that are configured in the options table
+        </li>
+        <li><span class="parameter">setup</span>
+         a function that takes provider options table, provider name, provider index and returns the setup provider table, optional, default is <a href="../modules/core.utils.status.html#astronvim.status.utils.build_provider">astronvim.status.utils.build_provider</a>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the fully setup options table with the appropriately ordered providers
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "astronvim.status.utils.width"></a>
     <strong>astronvim.status.utils.width(is_winbar)</strong>
     </dt>
@@ -2057,13 +2193,36 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "opts"></a>
+    <strong>opts</strong>
+    </dt>
+    <dd>
+    A provider function for showing if paste is enabled
+
+
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-10-23 17:33:51 </i>
+<i style="float:right;">Last updated 2022-11-03 04:06:31 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
