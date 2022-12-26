@@ -89,6 +89,14 @@
 	<td class="summary">Get the foreground color group for the current filetype</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.hl.get_attributes">astronvim.status.hl.get_attributes(name, include_bg)</a></td>
+	<td class="summary">Merge the color and attributes from user settings for a given name</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.hl.file_icon">astronvim.status.hl.file_icon(name)</a></td>
+	<td class="summary">Enable filetype color highlight if enabled in icon<em>highlights.file</em>icon options</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.init.breadcrumbs">astronvim.status.init.breadcrumbs(opts)</a></td>
 	<td class="summary">An <code>init</code> function to build a set of children components for LSP breadcrumbs</td>
 	</tr>
@@ -99,6 +107,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.provider.fill">astronvim.status.provider.fill()</a></td>
 	<td class="summary">A provider function for the fill string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.provider.tabnr">astronvim.status.provider.tabnr()</a></td>
+	<td class="summary">A provider function for the current tab numbre</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.provider.spell">astronvim.status.provider.spell(opts)</a></td>
@@ -189,7 +201,7 @@
 	<td class="summary">A condition function if the window is currently active</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.condition.buffer_matches">astronvim.status.condition.buffer_matches(patterns)</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.condition.buffer_matches">astronvim.status.condition.buffer_matches(patterns, bufnr)</a></td>
 	<td class="summary">A condition function if the buffer filetype,buftype,bufname match a pattern</td>
 	</tr>
 	<tr>
@@ -201,11 +213,11 @@
 	<td class="summary">A condition function if search is visible</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.condition.is_git_repo">astronvim.status.condition.is_git_repo()</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.condition.is_git_repo">astronvim.status.condition.is_git_repo(bufnr)</a></td>
 	<td class="summary">A condition function if the current file is in a git repo</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.condition.git_changed">astronvim.status.condition.git_changed()</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.condition.git_changed">astronvim.status.condition.git_changed(bufnr)</a></td>
 	<td class="summary">A condition function if there are any git changes</td>
 	</tr>
 	<tr>
@@ -217,11 +229,11 @@
 	<td class="summary">A condition function if the current buffer is read only</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.condition.has_diagnostics">astronvim.status.condition.has_diagnostics()</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.condition.has_diagnostics">astronvim.status.condition.has_diagnostics(bufnr)</a></td>
 	<td class="summary">A condition function if the current file has any diagnostics</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.condition.has_filetype">astronvim.status.condition.has_filetype()</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.condition.has_filetype">astronvim.status.condition.has_filetype(bufnr)</a></td>
 	<td class="summary">A condition function if there is a defined filetype</td>
 	</tr>
 	<tr>
@@ -229,11 +241,11 @@
 	<td class="summary">A condition function if Aerial is available</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.condition.lsp_attached">astronvim.status.condition.lsp_attached()</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.condition.lsp_attached">astronvim.status.condition.lsp_attached(bufnr)</a></td>
 	<td class="summary">A condition function if LSP is attached</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.condition.treesitter_available">astronvim.status.condition.treesitter_available()</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.condition.treesitter_available">astronvim.status.condition.treesitter_available(bufnr)</a></td>
 	<td class="summary">A condition function if treesitter is in use</td>
 	</tr>
 	<tr>
@@ -241,12 +253,16 @@
 	<td class="summary">A utility function to stylize a string with an icon from lspkind, separators, and left/right padding</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.status.component.fill">astronvim.status.component.fill()</a></td>
+	<td class="name" nowrap><a href="#astronvim.status.component.fill">astronvim.status.component.fill(opts)</a></td>
 	<td class="summary">A Heirline component for filling in the empty space of the bar</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.component.file_info">astronvim.status.component.file_info(opts)</a></td>
 	<td class="summary">A function to build a set of children components for an entire file information section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.status.component.tabline_file_info">astronvim.status.component.tabline_file_info(opts)</a></td>
+	<td class="summary">A function with different file_info defaults specifically for use in the tabline</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#astronvim.status.component.nav">astronvim.status.component.nav(opts)</a></td>
@@ -446,6 +462,67 @@
 
 </dd>
     <dt>
+    <a name = "astronvim.status.hl.get_attributes"></a>
+    <strong>astronvim.status.hl.get_attributes(name, include_bg)</strong>
+    </dt>
+    <dd>
+    Merge the color and attributes from user settings for a given name
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         string, the name of the element to get the attributes and colors for
+        </li>
+        <li><span class="parameter">include_bg</span>
+         boolean whether or not to include background color (Default: false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a table of highlight information
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = astronvim.status.hl.get_attributes(<span class="string">"treesitter"</span>) },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "astronvim.status.hl.file_icon"></a>
+    <strong>astronvim.status.hl.file_icon(name)</strong>
+    </dt>
+    <dd>
+    Enable filetype color highlight if enabled in icon<em>highlights.file</em>icon options
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         string of the icon<em>highlights.file</em>icon table element
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function for setting hl property in a component
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = astronvim.status.hl.file_icon(<span class="string">"winbar"</span>) },</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "astronvim.status.init.breadcrumbs"></a>
     <strong>astronvim.status.init.breadcrumbs(opts)</strong>
     </dt>
@@ -523,6 +600,29 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> heirline_component = { provider = astronvim.status.provider.fill }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "astronvim.status.provider.tabnr"></a>
+    <strong>astronvim.status.provider.tabnr()</strong>
+    </dt>
+    <dd>
+    A provider function for the current tab numbre
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the statusline function to return a string for a tab number
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = astronvim.status.provider.tabnr() }</pre>
     </ul>
 
 </dd>
@@ -1244,7 +1344,7 @@
 </dd>
     <dt>
     <a name = "astronvim.status.condition.buffer_matches"></a>
-    <strong>astronvim.status.condition.buffer_matches(patterns)</strong>
+    <strong>astronvim.status.condition.buffer_matches(patterns, bufnr)</strong>
     </dt>
     <dd>
     A condition function if the buffer filetype,buftype,bufname match a pattern
@@ -1253,9 +1353,10 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">patterns</span>
-
-
-
+         the table of patterns to match
+        </li>
+        <li><span class="parameter">bufnr</span>
+         number of the buffer to match (Default: 0 [current])
         </li>
     </ul>
 
@@ -1321,12 +1422,18 @@
 </dd>
     <dt>
     <a name = "astronvim.status.condition.is_git_repo"></a>
-    <strong>astronvim.status.condition.is_git_repo()</strong>
+    <strong>astronvim.status.condition.is_git_repo(bufnr)</strong>
     </dt>
     <dd>
     A condition function if the current file is in a git repo
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -1344,12 +1451,18 @@
 </dd>
     <dt>
     <a name = "astronvim.status.condition.git_changed"></a>
-    <strong>astronvim.status.condition.git_changed()</strong>
+    <strong>astronvim.status.condition.git_changed(bufnr)</strong>
     </dt>
     <dd>
     A condition function if there are any git changes
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -1376,9 +1489,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">bufnr</span>
-
-
-
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
         </li>
     </ul>
 
@@ -1407,9 +1518,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">bufnr</span>
-
-
-
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
         </li>
     </ul>
 
@@ -1429,12 +1538,18 @@
 </dd>
     <dt>
     <a name = "astronvim.status.condition.has_diagnostics"></a>
-    <strong>astronvim.status.condition.has_diagnostics()</strong>
+    <strong>astronvim.status.condition.has_diagnostics(bufnr)</strong>
     </dt>
     <dd>
     A condition function if the current file has any diagnostics
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -1452,12 +1567,18 @@
 </dd>
     <dt>
     <a name = "astronvim.status.condition.has_filetype"></a>
-    <strong>astronvim.status.condition.has_filetype()</strong>
+    <strong>astronvim.status.condition.has_filetype(bufnr)</strong>
     </dt>
     <dd>
     A condition function if there is a defined filetype
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -1499,12 +1620,18 @@
 </dd>
     <dt>
     <a name = "astronvim.status.condition.lsp_attached"></a>
-    <strong>astronvim.status.condition.lsp_attached()</strong>
+    <strong>astronvim.status.condition.lsp_attached(bufnr)</strong>
     </dt>
     <dd>
     A condition function if LSP is attached
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -1522,12 +1649,18 @@
 </dd>
     <dt>
     <a name = "astronvim.status.condition.treesitter_available"></a>
-    <strong>astronvim.status.condition.treesitter_available()</strong>
+    <strong>astronvim.status.condition.treesitter_available(bufnr)</strong>
     </dt>
     <dd>
     A condition function if treesitter is in use
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -1577,12 +1710,18 @@
 </dd>
     <dt>
     <a name = "astronvim.status.component.fill"></a>
-    <strong>astronvim.status.component.fill()</strong>
+    <strong>astronvim.status.component.fill(opts)</strong>
     </dt>
     <dd>
     A Heirline component for filling in the empty space of the bar
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring the other fields of the heirline component
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -1624,6 +1763,35 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> heirline_component = astronvim.status.component.file_info()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "astronvim.status.component.tabline_file_info"></a>
+    <strong>astronvim.status.component.tabline_file_info(opts)</strong>
+    </dt>
+    <dd>
+    A function with different file_info defaults specifically for use in the tabline
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring file<em>icon, filename, filetype, file</em>modified, file<em>read</em>only, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = astronvim.status.component.tabline_file_info()</pre>
     </ul>
 
 </dd>
@@ -2195,7 +2363,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-12-13 04:18:02 </i>
+<i style="float:right;">Last updated 2022-12-26 14:40:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
