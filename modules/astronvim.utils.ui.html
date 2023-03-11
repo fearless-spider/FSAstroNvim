@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.html">astronvim.utils.status</a></li>
+  <li><strong>astronvim.utils.ui</strong></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.ui</code></h1>
+<p>
+<h3>AstroNvim UI Options</h3>
+
+<p>  Utility functions for easy UI toggles.</p>
+</p>
+<p> This module can be loaded with <code>local ui = require(&quot;astronvim.utils.ui&quot;)</code></p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.html#">astronvim.utils</a>
+    </ul>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2022</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#toggle_ui_notifications">toggle_ui_notifications()</a></td>
+	<td class="summary">Toggle notifications for UI toggles</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_autopairs">toggle_autopairs()</a></td>
+	<td class="summary">Toggle autopairs</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_diagnostics">toggle_diagnostics()</a></td>
+	<td class="summary">Toggle diagnostics</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_background">toggle_background()</a></td>
+	<td class="summary">Toggle background="dark"|"light"</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_cmp">toggle_cmp()</a></td>
+	<td class="summary">Toggle cmp entrirely</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_autoformat">toggle_autoformat()</a></td>
+	<td class="summary">Toggle auto format</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_buffer_autoformat">toggle_buffer_autoformat()</a></td>
+	<td class="summary">Toggle buffer local auto format</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_codelens">toggle_codelens()</a></td>
+	<td class="summary">Toggle codelens refresh</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_tabline">toggle_tabline()</a></td>
+	<td class="summary">Toggle showtabline=2|0</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_conceal">toggle_conceal()</a></td>
+	<td class="summary">Toggle conceal=2|0</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_statusline">toggle_statusline()</a></td>
+	<td class="summary">Toggle laststatus=3|2|0</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_signcolumn">toggle_signcolumn()</a></td>
+	<td class="summary">Toggle signcolumn="auto"|"no"</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set_indent">set_indent()</a></td>
+	<td class="summary">Set the indent and tab related numbers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#change_number">change_number()</a></td>
+	<td class="summary">Change the number display modes</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_spell">toggle_spell()</a></td>
+	<td class="summary">Toggle spell</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_paste">toggle_paste()</a></td>
+	<td class="summary">Toggle paste</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_wrap">toggle_wrap()</a></td>
+	<td class="summary">Toggle wrap</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_syntax">toggle_syntax()</a></td>
+	<td class="summary">Toggle syntax highlighting and treesitter</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggle_url_match">toggle_url_match()</a></td>
+	<td class="summary">Toggle URL/URI syntax highlighting rules</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "toggle_ui_notifications"></a>
+    <strong>toggle_ui_notifications()</strong>
+    </dt>
+    <dd>
+    Toggle notifications for UI toggles
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_autopairs"></a>
+    <strong>toggle_autopairs()</strong>
+    </dt>
+    <dd>
+    Toggle autopairs
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_diagnostics"></a>
+    <strong>toggle_diagnostics()</strong>
+    </dt>
+    <dd>
+    Toggle diagnostics
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_background"></a>
+    <strong>toggle_background()</strong>
+    </dt>
+    <dd>
+    Toggle background="dark"|"light"
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_cmp"></a>
+    <strong>toggle_cmp()</strong>
+    </dt>
+    <dd>
+    Toggle cmp entrirely
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_autoformat"></a>
+    <strong>toggle_autoformat()</strong>
+    </dt>
+    <dd>
+    Toggle auto format
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_buffer_autoformat"></a>
+    <strong>toggle_buffer_autoformat()</strong>
+    </dt>
+    <dd>
+    Toggle buffer local auto format
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_codelens"></a>
+    <strong>toggle_codelens()</strong>
+    </dt>
+    <dd>
+    Toggle codelens refresh
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_tabline"></a>
+    <strong>toggle_tabline()</strong>
+    </dt>
+    <dd>
+    Toggle showtabline=2|0
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_conceal"></a>
+    <strong>toggle_conceal()</strong>
+    </dt>
+    <dd>
+    Toggle conceal=2|0
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_statusline"></a>
+    <strong>toggle_statusline()</strong>
+    </dt>
+    <dd>
+    Toggle laststatus=3|2|0
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_signcolumn"></a>
+    <strong>toggle_signcolumn()</strong>
+    </dt>
+    <dd>
+    Toggle signcolumn="auto"|"no"
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set_indent"></a>
+    <strong>set_indent()</strong>
+    </dt>
+    <dd>
+    Set the indent and tab related numbers
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "change_number"></a>
+    <strong>change_number()</strong>
+    </dt>
+    <dd>
+    Change the number display modes
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_spell"></a>
+    <strong>toggle_spell()</strong>
+    </dt>
+    <dd>
+    Toggle spell
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_paste"></a>
+    <strong>toggle_paste()</strong>
+    </dt>
+    <dd>
+    Toggle paste
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_wrap"></a>
+    <strong>toggle_wrap()</strong>
+    </dt>
+    <dd>
+    Toggle wrap
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_syntax"></a>
+    <strong>toggle_syntax()</strong>
+    </dt>
+    <dd>
+    Toggle syntax highlighting and treesitter
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggle_url_match"></a>
+    <strong>toggle_url_match()</strong>
+    </dt>
+    <dd>
+    Toggle URL/URI syntax highlighting rules
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2023-03-11 15:21:52 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

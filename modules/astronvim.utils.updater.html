@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.html">astronvim.utils.status</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><strong>astronvim.utils.updater</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.updater</code></h1>
+<p>
+<h3>AstroNvim Updater</h3>
+
+<p> AstroNvim Updater utilities to use within AstroNvim and user configurations.</p>
+</p>
+<p> This module can also loaded with <code>local updater = require(&quot;astronvim.utils.updater&quot;)</code></p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.html#">astronvim.utils</a>
+    </ul>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2022</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#generate_snapshot">generate_snapshot(write)</a></td>
+	<td class="summary">Helper function to generate AstroNvim snapshots (For internal use only)</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#version">version(quiet)</a></td>
+	<td class="summary">Get the current AstroNvim version</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#changelog">changelog(quiet)</a></td>
+	<td class="summary">Get the full AstroNvim changelog</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#update_packages">update_packages()</a></td>
+	<td class="summary">Sync Packer and then update Mason</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#create_rollback">create_rollback(write)</a></td>
+	<td class="summary">Create a table of options for the currently installed AstroNvim version</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rollback">rollback()</a></td>
+	<td class="summary">AstroNvim's rollback to saved previous version function</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#update">update(opts)</a></td>
+	<td class="summary">AstroNvim's updater function</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "generate_snapshot"></a>
+    <strong>generate_snapshot(write)</strong>
+    </dt>
+    <dd>
+    Helper function to generate AstroNvim snapshots (For internal use only)
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">write</span>
+         boolean whether or not to write to the snapshot file (default: false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the plugin specification table of the snapshot
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "version"></a>
+    <strong>version(quiet)</strong>
+    </dt>
+    <dd>
+    Get the current AstroNvim version
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">quiet</span>
+         boolean to quietly execute or send a notification
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the current AstroNvim version string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "changelog"></a>
+    <strong>changelog(quiet)</strong>
+    </dt>
+    <dd>
+    Get the full AstroNvim changelog
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">quiet</span>
+         boolean to quietly execute or display the changelog
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the current AstroNvim changelog table of commit messages
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "update_packages"></a>
+    <strong>update_packages()</strong>
+    </dt>
+    <dd>
+    Sync Packer and then update Mason
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "create_rollback"></a>
+    <strong>create_rollback(write)</strong>
+    </dt>
+    <dd>
+    Create a table of options for the currently installed AstroNvim version
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">write</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the table of updater options
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "rollback"></a>
+    <strong>rollback()</strong>
+    </dt>
+    <dd>
+    AstroNvim's rollback to saved previous version function
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "update"></a>
+    <strong>update(opts)</strong>
+    </dt>
+    <dd>
+    AstroNvim's updater function
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2023-03-11 15:21:52 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

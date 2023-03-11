@@ -39,33 +39,31 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
-  <li><a href="../modules/core.utils.git.html">core.utils.git</a></li>
-  <li><a href="../modules/core.utils.html">core.utils</a></li>
-  <li><strong>core.utils.lsp</strong></li>
-  <li><a href="../modules/core.utils.mason.html">core.utils.mason</a></li>
-  <li><a href="../modules/core.utils.status.html">core.utils.status</a></li>
-  <li><a href="../modules/core.utils.ui.html">core.utils.ui</a></li>
-  <li><a href="../modules/core.utils.updater.html">core.utils.updater</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/init.lua.html">init.lua</a></li>
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><strong>astronvim.utils.lsp</strong></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.html">astronvim.utils.status</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
 </ul>
 
 </div>
 
 <div id="content">
 
-<h1>Module <code>core.utils.lsp</code></h1>
+<h1>Module <code>astronvim.utils.lsp</code></h1>
 <p>
-<h3>AstroNvim LSP</h3>
-</p>
-<p> This module is automatically loaded by AstroNvim on during it's initialization into global variable <code>astronvim.lsp</code></p>
+<h3>AstroNvim LSP Utils</h3>
 
-<p> This module can also be manually loaded with <code>local updater = require(&quot;core.utils&quot;).lsp</code></p>
+<p> LSP related utility functions to use within AstroNvim and user configurations.</p>
+</p>
+<p> This module can be loaded with <code>local lsp_utils = require(&quot;astronvim.utils.lsp&quot;)</code></p>
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/core.utils.html#">core.utils</a>
+         <a href="../modules/astronvim.utils.html#">astronvim.utils</a>
     </ul>
     <h3>Info:</h3>
     <ul>
@@ -77,22 +75,22 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.lsp.setup">astronvim.lsp.setup(server)</a></td>
+	<td class="name" nowrap><a href="#setup">setup(server)</a></td>
 	<td class="summary">Helper function to set up a given server with the Neovim LSP client</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.lsp.on_attach">astronvim.lsp.on_attach(client, bufnr)</a></td>
-	<td class="summary">The <a href="../modules/core.utils.lsp.html#astronvim.lsp.on_attach">on_attach</a> function used by AstroNvim</td>
+	<td class="name" nowrap><a href="#on_attach">on_attach(client, bufnr)</a></td>
+	<td class="summary">The <a href="../modules/astronvim.utils.lsp.html#on_attach">on_attach</a> function used by AstroNvim</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.lsp.server_settings">astronvim.lsp.server_settings(server_name)</a></td>
-	<td class="summary">Get the server settings for a given language server to be provided to the server's <code>setup()</code> call</td>
+	<td class="name" nowrap><a href="#config">config(server_name)</a></td>
+	<td class="summary">Get the server configuration for a given language server to be provided to the server's <code>setup()</code> call</td>
 	</tr>
 </table>
 <h2><a href="#Fields">Fields</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#astronvim.lsp.capabilities">astronvim.lsp.capabilities</a></td>
+	<td class="name" nowrap><a href="#capabilities">capabilities</a></td>
 	<td class="summary">The default AstroNvim LSP capabilities</td>
 	</tr>
 </table>
@@ -105,8 +103,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "astronvim.lsp.setup"></a>
-    <strong>astronvim.lsp.setup(server)</strong>
+    <a name = "setup"></a>
+    <strong>setup(server)</strong>
     </dt>
     <dd>
     Helper function to set up a given server with the Neovim LSP client
@@ -125,11 +123,11 @@
 
 </dd>
     <dt>
-    <a name = "astronvim.lsp.on_attach"></a>
-    <strong>astronvim.lsp.on_attach(client, bufnr)</strong>
+    <a name = "on_attach"></a>
+    <strong>on_attach(client, bufnr)</strong>
     </dt>
     <dd>
-    The <a href="../modules/core.utils.lsp.html#astronvim.lsp.on_attach">on_attach</a> function used by AstroNvim
+    The <a href="../modules/astronvim.utils.lsp.html#on_attach">on_attach</a> function used by AstroNvim
 
 
     <h3>Parameters:</h3>
@@ -148,11 +146,11 @@
 
 </dd>
     <dt>
-    <a name = "astronvim.lsp.server_settings"></a>
-    <strong>astronvim.lsp.server_settings(server_name)</strong>
+    <a name = "config"></a>
+    <strong>config(server_name)</strong>
     </dt>
     <dd>
-    Get the server settings for a given language server to be provided to the server's <code>setup()</code> call
+    Get the server configuration for a given language server to be provided to the server's <code>setup()</code> call
 
 
     <h3>Parameters:</h3>
@@ -177,8 +175,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "astronvim.lsp.capabilities"></a>
-    <strong>astronvim.lsp.capabilities</strong>
+    <a name = "capabilities"></a>
+    <strong>capabilities</strong>
     </dt>
     <dd>
     The default AstroNvim LSP capabilities
@@ -197,7 +195,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2023-02-28 15:31:59 </i>
+<i style="float:right;">Last updated 2023-03-11 15:21:52 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>astronvim.bootstrap</strong></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.html">astronvim.utils.status</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.bootstrap</code></h1>
+<p>
+<h3>AstroNvim Core Bootstrap</h3>
+
+<p> This module simply sets up the global <code>astronvim</code> module.</p>
+</p>
+<p> This is automatically loaded and should not be resourced, everything is accessible through the global <code>astronvim</code> variable.</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2022</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.user_opts">astronvim.user_opts(module, default, extend)</a></td>
+	<td class="summary">User configuration entry point to override the default options of a configuration table with a user configuration file or table in the user/init.lua user settings</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.updater.snapshot">astronvim.updater.snapshot</a></td>
+	<td class="summary">the location of the snapshot of plugin commit pins for stable AstroNvim</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.user_terminals">astronvim.user_terminals</a></td>
+	<td class="summary">table of user created terminals</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.lsp">astronvim.lsp</a></td>
+	<td class="summary">table of language servers to ignore the setup of, configured through lsp.skip_setup in the user configuration</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.install">astronvim.install</a></td>
+	<td class="summary">installation details from external installers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.install.config">astronvim.install.config</a></td>
+	<td class="summary">external astronvim configuration folder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#astronvim.default_colorscheme">astronvim.default_colorscheme</a></td>
+	<td class="summary">the default colorscheme to apply on startup</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "astronvim.user_opts"></a>
+    <strong>astronvim.user_opts(module, default, extend)</strong>
+    </dt>
+    <dd>
+    User configuration entry point to override the default options of a configuration table with a user configuration file or table in the user/init.lua user settings
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">module</span>
+         the module path of the override setting
+        </li>
+        <li><span class="parameter">default</span>
+         the default settings that will be overridden
+        </li>
+        <li><span class="parameter">extend</span>
+         boolean value to either extend the default settings or overwrite them with the user settings entirely (default: true)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the new configuration settings with the user overrides applied
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "astronvim.updater.snapshot"></a>
+    <strong>astronvim.updater.snapshot</strong>
+    </dt>
+    <dd>
+    the location of the snapshot of plugin commit pins for stable AstroNvim
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">module</span>
+
+
+
+        </li>
+        <li><span class="parameter">path</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "astronvim.user_terminals"></a>
+    <strong>astronvim.user_terminals</strong>
+    </dt>
+    <dd>
+    table of user created terminals
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "astronvim.lsp"></a>
+    <strong>astronvim.lsp</strong>
+    </dt>
+    <dd>
+    table of language servers to ignore the setup of, configured through lsp.skip_setup in the user configuration
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">skip_setup</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "astronvim.install"></a>
+    <strong>astronvim.install</strong>
+    </dt>
+    <dd>
+    installation details from external installers
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "astronvim.install.config"></a>
+    <strong>astronvim.install.config</strong>
+    </dt>
+    <dd>
+    external astronvim configuration folder
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "astronvim.default_colorscheme"></a>
+    <strong>astronvim.default_colorscheme</strong>
+    </dt>
+    <dd>
+    the default colorscheme to apply on startup
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2023-03-11 15:21:52 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

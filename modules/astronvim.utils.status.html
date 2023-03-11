@@ -1,0 +1,2831 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><strong>astronvim.utils.status</strong></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.status</code></h1>
+<p>
+<h3>AstroNvim Status API</h3>
+
+<p> Statusline related utility functions to use within AstroNvim and user configurations.</p>
+</p>
+<p> This module can be loaded with <code>local status = require &quot;astronvim.utils.status&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2022</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#M.hl.lualine_mode">M.hl.lualine_mode(mode, fallback)</a></td>
+	<td class="summary">Get the highlight background color of the lualine theme for the current colorscheme</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.hl.mode">M.hl.mode()</a></td>
+	<td class="summary">Get the highlight for the current mode</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.hl.mode_bg">M.hl.mode_bg()</a></td>
+	<td class="summary">Get the foreground color group for the current mode, good for usage with Heirline surround utility</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.hl.filetype_color">M.hl.filetype_color(self)</a></td>
+	<td class="summary">Get the foreground color group for the current filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.hl.get_attributes">M.hl.get_attributes(name, include_bg)</a></td>
+	<td class="summary">Merge the color and attributes from user settings for a given name</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.hl.file_icon">M.hl.file_icon(name)</a></td>
+	<td class="summary">Enable filetype color highlight if enabled in icon<em>highlights.file</em>icon options</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.init.breadcrumbs">M.init.breadcrumbs(opts)</a></td>
+	<td class="summary">An <code>init</code> function to build a set of children components for LSP breadcrumbs</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.init.separated_path">M.init.separated_path(opts)</a></td>
+	<td class="summary">An <code>init</code> function to build a set of children components for a separated path to file</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.init.update_events">M.init.update_events(opts)</a></td>
+	<td class="summary">An <code>init</code> function to build multiple update events which is not supported yet by Heirline's update field</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.fill">M.provider.fill()</a></td>
+	<td class="summary">A provider function for the fill string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.signcolumn">M.provider.signcolumn(opts)</a></td>
+	<td class="summary">A provider function for the signcolumn string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.numbercolumn">M.provider.numbercolumn(opts)</a></td>
+	<td class="summary">A provider function for the numbercolumn string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.foldcolumn">M.provider.foldcolumn(opts)</a></td>
+	<td class="summary">A provider function for building a foldcolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.tabnr">M.provider.tabnr()</a></td>
+	<td class="summary">A provider function for the current tab numbre</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.spell">M.provider.spell(opts)</a></td>
+	<td class="summary">A provider function for showing if spellcheck is on</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.macro_recording">M.provider.macro_recording(opts)</a></td>
+	<td class="summary">A provider function for displaying if a macro is currently being recorded</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.search_count">M.provider.search_count(opts)</a></td>
+	<td class="summary">A provider function for displaying the current search count</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.mode_text">M.provider.mode_text(opts)</a></td>
+	<td class="summary">A provider function for showing the text of the current vim mode</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.percentage">M.provider.percentage(opts)</a></td>
+	<td class="summary">A provider function for showing the percentage of the current location in a document</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.ruler">M.provider.ruler(opts)</a></td>
+	<td class="summary">A provider function for showing the current line and character in a document</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.scrollbar">M.provider.scrollbar(opts)</a></td>
+	<td class="summary">A provider function for showing the current location as a scrollbar</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.close_button">M.provider.close_button(opts)</a></td>
+	<td class="summary">A provider to simply show a cloes button icon</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.filetype">M.provider.filetype(opts)</a></td>
+	<td class="summary">A provider function for showing the current filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.filename">M.provider.filename(opts)</a></td>
+	<td class="summary">A provider function for showing the current filename</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.unique_path">M.provider.unique_path(opts)</a></td>
+	<td class="summary">Get a unique filepath between all buffers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.file_modified">M.provider.file_modified(opts)</a></td>
+	<td class="summary">A provider function for showing if the current file is modifiable</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.file_read_only">M.provider.file_read_only(opts)</a></td>
+	<td class="summary">A provider function for showing if the current file is read-only</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.file_icon">M.provider.file_icon(opts)</a></td>
+	<td class="summary">A provider function for showing the current filetype icon</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.git_branch">M.provider.git_branch(opts)</a></td>
+	<td class="summary">A provider function for showing the current git branch</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.git_diff">M.provider.git_diff(opts)</a></td>
+	<td class="summary">A provider function for showing the current git diff count of a specific type</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.diagnostics">M.provider.diagnostics(opts)</a></td>
+	<td class="summary">A provider function for showing the current diagnostic count of a specific severity</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.lsp_progress">M.provider.lsp_progress(opts)</a></td>
+	<td class="summary">A provider function for showing the current progress of loading language servers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.lsp_client_names">M.provider.lsp_client_names(opts)</a></td>
+	<td class="summary">A provider function for showing the connected LSP client names</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.treesitter_status">M.provider.treesitter_status(opts)</a></td>
+	<td class="summary">A provider function for showing if treesitter is connected</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.provider.str">M.provider.str(opts)</a></td>
+	<td class="summary">A provider function for displaying a single string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.is_active">M.condition.is_active()</a></td>
+	<td class="summary">A condition function if the window is currently active</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.buffer_matches">M.condition.buffer_matches(patterns, bufnr)</a></td>
+	<td class="summary">A condition function if the buffer filetype,buftype,bufname match a pattern</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.is_macro_recording">M.condition.is_macro_recording()</a></td>
+	<td class="summary">A condition function if a macro is being recorded</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.is_hlsearch">M.condition.is_hlsearch()</a></td>
+	<td class="summary">A condition function if search is visible</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.is_git_repo">M.condition.is_git_repo(bufnr)</a></td>
+	<td class="summary">A condition function if the current file is in a git repo</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.git_changed">M.condition.git_changed(bufnr)</a></td>
+	<td class="summary">A condition function if there are any git changes</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.file_modified">M.condition.file_modified(bufnr)</a></td>
+	<td class="summary">A condition function if the current buffer is modified</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.file_read_only">M.condition.file_read_only(bufnr)</a></td>
+	<td class="summary">A condition function if the current buffer is read only</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.has_diagnostics">M.condition.has_diagnostics(bufnr)</a></td>
+	<td class="summary">A condition function if the current file has any diagnostics</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.has_filetype">M.condition.has_filetype(bufnr)</a></td>
+	<td class="summary">A condition function if there is a defined filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.aerial_available">M.condition.aerial_available()</a></td>
+	<td class="summary">A condition function if Aerial is available</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.lsp_attached">M.condition.lsp_attached(bufnr)</a></td>
+	<td class="summary">A condition function if LSP is attached</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.treesitter_available">M.condition.treesitter_available(bufnr)</a></td>
+	<td class="summary">A condition function if treesitter is in use</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.foldcolumn_enabled">M.condition.foldcolumn_enabled()</a></td>
+	<td class="summary">A condition function if the foldcolumn is enabled</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.numbercolumn_enabled">M.condition.numbercolumn_enabled()</a></td>
+	<td class="summary">A condition function if the number column is enabled</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.stylize">M.utils.stylize(str, opts)</a></td>
+	<td class="summary">A utility function to stylize a string with an icon from lspkind, separators, and left/right padding</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.fill">M.component.fill(opts)</a></td>
+	<td class="summary">A Heirline component for filling in the empty space of the bar</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.file_info">M.component.file_info(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an entire file information section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.tabline_file_info">M.component.tabline_file_info(opts)</a></td>
+	<td class="summary">A function with different file_info defaults specifically for use in the tabline</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.nav">M.component.nav(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an entire navigation section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.cmd_info">M.component.cmd_info(opts)</a></td>
+	<td class="summary">A function to build a set of children components for information shown in the cmdline</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.mode">M.component.mode(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a mode section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.breadcrumbs">M.component.breadcrumbs(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an LSP breadcrumbs section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.separated_path">M.component.separated_path(opts)</a></td>
+	<td class="summary">A function to build a set of children components for the current file path</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.git_branch">M.component.git_branch(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a git branch section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.git_diff">M.component.git_diff(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a git difference section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.diagnostics">M.component.diagnostics(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a diagnostics section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.treesitter">M.component.treesitter(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a Treesitter section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.lsp">M.component.lsp(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an LSP section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.foldcolumn">M.component.foldcolumn(opts)</a></td>
+	<td class="summary">A function to build a set of components for a foldcolumn section in a statuscolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.numbercolumn">M.component.numbercolumn(opts)</a></td>
+	<td class="summary">A function to build a set of components for a numbercolumn section in statuscolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.signcolumn">M.component.signcolumn(opts)</a></td>
+	<td class="summary">A function to build a set of components for a signcolumn section in statuscolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.component.builder">M.component.builder(opts)</a></td>
+	<td class="summary">A general function to build a section of astronvim status providers with highlights, conditions, and section surrounding</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.build_provider">M.utils.build_provider(opts, provider)</a></td>
+	<td class="summary">Convert a component parameter table to a table that can be used with the component builder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.setup_providers">M.utils.setup_providers(opts, providers, setup)</a></td>
+	<td class="summary">Convert key/value table of options to an array of providers for the component builder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.width">M.utils.width(is_winbar)</a></td>
+	<td class="summary">A utility function to get the width of the bar</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pad_string">pad_string(str, padding)</a></td>
+	<td class="summary">Add left and/or right padding to a string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.surround">M.utils.surround(separator, color, component, condition)</a></td>
+	<td class="summary">Surround component with separator and color adjustment</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.encode_pos">M.utils.encode_pos(line, col, winnr)</a></td>
+	<td class="summary">Encode a position to a single value that can be decoded later</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.decode_pos">M.utils.decode_pos(c)</a></td>
+	<td class="summary">Decode a previously encoded position to it's sub parts</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.null_ls_providers">M.utils.null_ls_providers(filetype)</a></td>
+	<td class="summary">Get a list of registered null-ls providers for a given filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.null_ls_sources">M.utils.null_ls_sources(filetype, method)</a></td>
+	<td class="summary">Get the null-ls sources for a given null-ls method</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.utils.statuscolumn_clickargs">M.utils.statuscolumn_clickargs(self, minwid, clicks, button, mods)</a></td>
+	<td class="summary">A helper function for decoding statuscolumn click events with mouse click pressed, modifier keys, as well as which signcolumn sign was clicked if any</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.heirline.tab_type">M.heirline.tab_type(self, prefix)</a></td>
+	<td class="summary">A helper function to get the type a tab or buffer is</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.heirline.make_buflist">M.heirline.make_buflist(component)</a></td>
+	<td class="summary">Make a list of buffers, rendering each buffer with the provided component</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.heirline.make_tablist">M.heirline.make_tablist(...)</a></td>
+	<td class="summary">Alias to require("heirline.utils").make_tablist</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.heirline.buffer_picker">M.heirline.buffer_picker(callback)</a></td>
+	<td class="summary">Run the buffer picker and execute the callback function on the selected buffer</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#opts">opts</a></td>
+	<td class="summary">A provider function for showing if paste is enabled</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "M.hl.lualine_mode"></a>
+    <strong>M.hl.lualine_mode(mode, fallback)</strong>
+    </dt>
+    <dd>
+    Get the highlight background color of the lualine theme for the current colorscheme
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mode</span>
+         the neovim mode to get the color of
+        </li>
+        <li><span class="parameter">fallback</span>
+         the color to fallback on if a lualine theme is not present
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The background color of the lualine theme or the fallback parameter if one doesn't exist
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.hl.mode"></a>
+    <strong>M.hl.mode()</strong>
+    </dt>
+    <dd>
+    Get the highlight for the current mode
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the highlight group for the current mode
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.mode },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.hl.mode_bg"></a>
+    <strong>M.hl.mode_bg()</strong>
+    </dt>
+    <dd>
+    Get the foreground color group for the current mode, good for usage with Heirline surround utility
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the highlight group for the current mode foreground
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"heirline.utils"</span>).surround({ <span class="string">"|"</span>, <span class="string">"|"</span> }, <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.mode_bg, heirline_component),</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.hl.filetype_color"></a>
+    <strong>M.hl.filetype_color(self)</strong>
+    </dt>
+    <dd>
+    Get the foreground color group for the current filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the highlight group for the current filetype foreground
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.fileicon(), hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.filetype_color },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.hl.get_attributes"></a>
+    <strong>M.hl.get_attributes(name, include_bg)</strong>
+    </dt>
+    <dd>
+    Merge the color and attributes from user settings for a given name
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         string, the name of the element to get the attributes and colors for
+        </li>
+        <li><span class="parameter">include_bg</span>
+         boolean whether or not to include background color (Default: false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a table of highlight information
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.get_attributes(<span class="string">"treesitter"</span>) },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.hl.file_icon"></a>
+    <strong>M.hl.file_icon(name)</strong>
+    </dt>
+    <dd>
+    Enable filetype color highlight if enabled in icon<em>highlights.file</em>icon options
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         string of the icon<em>highlights.file</em>icon table element
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function for setting hl property in a component
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.file_icon(<span class="string">"winbar"</span>) },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.init.breadcrumbs"></a>
+    <strong>M.init.breadcrumbs(opts)</strong>
+    </dt>
+    <dd>
+    An <code>init</code> function to build a set of children components for LSP breadcrumbs
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring the breadcrumbs (default: <code>{ max_depth = 5, separator = &quot;  &quot;, icon = { enabled = true, hl = false }, padding = { left = 0, right = 0 } }</code>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline init function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.breadcrumbs { padding = { left = <span class="number">1</span> } } }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.init.separated_path"></a>
+    <strong>M.init.separated_path(opts)</strong>
+    </dt>
+    <dd>
+    An <code>init</code> function to build a set of children components for a separated path to file
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring the breadcrumbs (default: <code>{ max_depth = 3, path_func = M.provider.unique_path(), separator = &quot;  &quot;, suffix = true, padding = { left = 0, right = 0 } }</code>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline init function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.separated_path { padding = { left = <span class="number">1</span> } } }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.init.update_events"></a>
+    <strong>M.init.update_events(opts)</strong>
+    </dt>
+    <dd>
+    An <code>init</code> function to build multiple update events which is not supported yet by Heirline's update field
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         an array like table of autocmd events as either just a string or a table with custom patterns and callbacks.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline init function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.update_events { <span class="string">"BufEnter"</span>, { <span class="string">"User"</span>, pattern = <span class="string">"LspProgressUpdate"</span> } } }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.fill"></a>
+    <strong>M.provider.fill()</strong>
+    </dt>
+    <dd>
+    A provider function for the fill string
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the statusline string for filling the empty space
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.fill }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.signcolumn"></a>
+    <strong>M.provider.signcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for the signcolumn string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the statuscolumn string for adding the signcolumn
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.signcolumn }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.numbercolumn"></a>
+    <strong>M.provider.numbercolumn(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for the numbercolumn string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the statuscolumn string for adding the numbercolumn
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.numbercolumn }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.foldcolumn"></a>
+    <strong>M.provider.foldcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for building a foldcolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a custom foldcolumn function for the statuscolumn that doesn't show the nest levels
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.foldcolumn }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.tabnr"></a>
+    <strong>M.provider.tabnr()</strong>
+    </dt>
+    <dd>
+    A provider function for the current tab numbre
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the statusline function to return a string for a tab number
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.tabnr() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.spell"></a>
+    <strong>M.provider.spell(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if spellcheck is on
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting if spell is enabled
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.spell() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.macro_recording"></a>
+    <strong>M.provider.macro_recording(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying if a macro is currently being recorded
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         a prefix before the recording register and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a function that returns a string of the current recording status
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.macro_recording() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.search_count"></a>
+    <strong>M.provider.search_count(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying the current search count
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for <code>vim.fn.searchcount</code> and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a function that returns a string of the current search location
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.search_count() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.mode_text"></a>
+    <strong>M.provider.mode_text(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the text of the current vim mode
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for padding the text and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for displaying the text of the current vim mode
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.mode_text() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.percentage"></a>
+    <strong>M.provider.percentage(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the percentage of the current location in a document
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for Top/Bot text, fixed width, and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the statusline string for displaying the percentage of current document location
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.percentage() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.ruler"></a>
+    <strong>M.provider.ruler(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current line and character in a document
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for padding the line and character locations and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the statusline string for showing location in document line<em>num:char</em>num
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.ruler({ pad_ruler = { line = <span class="number">3</span>, char = <span class="number">2</span> } }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.scrollbar"></a>
+    <strong>M.provider.scrollbar(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current location as a scrollbar
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the scrollbar
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.scrollbar() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.close_button"></a>
+    <strong>M.provider.close_button(opts)</strong>
+    </dt>
+    <dd>
+    A provider to simply show a cloes button icon
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function and the kind of icon to use
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        return the stylized icon
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.close_button() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.filetype"></a>
+    <strong>M.provider.filetype(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the filetype
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.filetype() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.filename"></a>
+    <strong>M.provider.filename(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current filename
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for argument to fnamemodify to format filename and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the filename
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.filename() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.unique_path"></a>
+    <strong>M.provider.unique_path(opts)</strong>
+    </dt>
+    <dd>
+    Get a unique filepath between all buffers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for function to get the buffer name, a buffer number, max length, and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        path to file that uniquely identifies each buffer
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.unique_path() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.file_modified"></a>
+    <strong>M.provider.file_modified(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if the current file is modifiable
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the indicator if the file is modified
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.file_modified() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.file_read_only"></a>
+    <strong>M.provider.file_read_only(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if the current file is read-only
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the indicator if the file is read-only
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.file_read_only() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.file_icon"></a>
+    <strong>M.provider.file_icon(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current filetype icon
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the filetype icon
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.file_icon() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.git_branch"></a>
+    <strong>M.provider.git_branch(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current git branch
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the git branch
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.git_branch() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.git_diff"></a>
+    <strong>M.provider.git_diff(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current git diff count of a specific type
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for type of git diff and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the git diff
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.git_diff({ <span class="global">type</span> = <span class="string">"added"</span> }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.diagnostics"></a>
+    <strong>M.provider.diagnostics(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current diagnostic count of a specific severity
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for severity of diagnostic and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the diagnostic count
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.diagnostics({ severity = <span class="string">"ERROR"</span> }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.lsp_progress"></a>
+    <strong>M.provider.lsp_progress(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current progress of loading language servers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the LSP progress
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.lsp_progress() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.lsp_client_names"></a>
+    <strong>M.provider.lsp_client_names(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the connected LSP client names
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for explanding null_ls clients, max width percentage, and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting the LSP client names
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.lsp_client_names({ expand_null_ls = <span class="keyword">true</span>, truncate = <span class="number">0.25</span> }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.treesitter_status"></a>
+    <strong>M.provider.treesitter_status(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if treesitter is connected
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the function for outputting TS if treesitter is connected
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.treesitter_status() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.str"></a>
+    <strong>M.provider.str(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying a single string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the stylized statusline string
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.str({ str = <span class="string">"Hello"</span> }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.is_active"></a>
+    <strong>M.condition.is_active()</strong>
+    </dt>
+    <dd>
+    A condition function if the window is currently active
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not the window is currently actie
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_active }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.buffer_matches"></a>
+    <strong>M.condition.buffer_matches(patterns, bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the buffer filetype,buftype,bufname match a pattern
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">patterns</span>
+         the table of patterns to match
+        </li>
+        <li><span class="parameter">bufnr</span>
+         number of the buffer to match (Default: 0 [current])
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not LSP is attached
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="keyword">function</span>() <span class="keyword">return</span> <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.buffer_matches { buftype = { <span class="string">"terminal"</span> } } <span class="keyword">end</span> }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.is_macro_recording"></a>
+    <strong>M.condition.is_macro_recording()</strong>
+    </dt>
+    <dd>
+    A condition function if a macro is being recorded
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not a macro is currently being recorded
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_macro_recording }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.is_hlsearch"></a>
+    <strong>M.condition.is_hlsearch()</strong>
+    </dt>
+    <dd>
+    A condition function if search is visible
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not searching is currently visible
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_hlsearch }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.is_git_repo"></a>
+    <strong>M.condition.is_git_repo(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current file is in a git repo
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not the current file is in a git repo
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_git_repo }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.git_changed"></a>
+    <strong>M.condition.git_changed(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if there are any git changes
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not there are any git changes
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.git_changed }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.file_modified"></a>
+    <strong>M.condition.file_modified(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current buffer is modified
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not the current buffer is modified
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.file_modified }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.file_read_only"></a>
+    <strong>M.condition.file_read_only(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current buffer is read only
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not the current buffer is read only or not modifiable
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.file_read_only }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.has_diagnostics"></a>
+    <strong>M.condition.has_diagnostics(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current file has any diagnostics
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not the current file has any diagnostics
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.has_diagnostics }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.has_filetype"></a>
+    <strong>M.condition.has_filetype(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if there is a defined filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not there is a filetype
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.has_filetype }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.aerial_available"></a>
+    <strong>M.condition.aerial_available()</strong>
+    </dt>
+    <dd>
+    A condition function if Aerial is available
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not aerial plugin is installed
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.aerial_available }
+ <span class="keyword">function</span> M.condition.aerial_available() <span class="keyword">return</span> is_available <span class="string">"aerial.nvim"</span> <span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.lsp_attached"></a>
+    <strong>M.condition.lsp_attached(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if LSP is attached
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not LSP is attached
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.lsp_attached }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.treesitter_available"></a>
+    <strong>M.condition.treesitter_available(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if treesitter is in use
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean of wether or not treesitter is active
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.treesitter_available }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.foldcolumn_enabled"></a>
+    <strong>M.condition.foldcolumn_enabled()</strong>
+    </dt>
+    <dd>
+    A condition function if the foldcolumn is enabled
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">true</span></span>
+        if vim.opt.foldcolumn > 0, false if vim.opt.foldcolumn == 0
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.condition.numbercolumn_enabled"></a>
+    <strong>M.condition.numbercolumn_enabled()</strong>
+    </dt>
+    <dd>
+    A condition function if the number column is enabled
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">true</span></span>
+        if vim.opt.number or vim.opt.relativenumber, false if neither
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.stylize"></a>
+    <strong>M.utils.stylize(str, opts)</strong>
+    </dt>
+    <dd>
+    A utility function to stylize a string with an icon from lspkind, separators, and left/right padding
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         the string to stylize
+        </li>
+        <li><span class="parameter">opts</span>
+         options of <code>{ padding = { left = 0, right = 0 }, separator = { left = &quot;|&quot;, right = &quot;|&quot; }, escape = true, show_empty = false, icon = { kind = &quot;NONE&quot;, padding = { left = 0, right = 0 } } }</code>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the stylized string
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> <span class="global">string</span> = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.stylize(<span class="string">"Hello"</span>, { padding = { left = <span class="number">1</span>, right = <span class="number">1</span> }, icon = { kind = <span class="string">"String"</span> } })</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.fill"></a>
+    <strong>M.component.fill(opts)</strong>
+    </dt>
+    <dd>
+    A Heirline component for filling in the empty space of the bar
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring the other fields of the heirline component
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.fill()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.file_info"></a>
+    <strong>M.component.file_info(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an entire file information section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring file<em>icon, filename, filetype, file</em>modified, file<em>read</em>only, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.file_info()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.tabline_file_info"></a>
+    <strong>M.component.tabline_file_info(opts)</strong>
+    </dt>
+    <dd>
+    A function with different file_info defaults specifically for use in the tabline
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring file<em>icon, filename, filetype, file</em>modified, file<em>read</em>only, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.tabline_file_info()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.nav"></a>
+    <strong>M.component.nav(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an entire navigation section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring ruler, percentage, scrollbar, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.nav()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.cmd_info"></a>
+    <strong>M.component.cmd_info(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for information shown in the cmdline
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring macro recording, search count, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.cmd_info()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.mode"></a>
+    <strong>M.component.mode(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a mode section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring mode_text, paste, spell, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.mode { mode_text = <span class="keyword">true</span> }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.breadcrumbs"></a>
+    <strong>M.component.breadcrumbs(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an LSP breadcrumbs section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring breadcrumbs and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.breadcumbs()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.separated_path"></a>
+    <strong>M.component.separated_path(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for the current file path
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring path and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.separated_path()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.git_branch"></a>
+    <strong>M.component.git_branch(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a git branch section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring git branch and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.git_branch()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.git_diff"></a>
+    <strong>M.component.git_diff(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a git difference section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring git changes and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.git_diff()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.diagnostics"></a>
+    <strong>M.component.diagnostics(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a diagnostics section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring diagnostic providers and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.diagnostics()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.treesitter"></a>
+    <strong>M.component.treesitter(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a Treesitter section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring diagnostic providers and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.treesitter()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.lsp"></a>
+    <strong>M.component.lsp(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an LSP section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring lsp progress and client_name providers and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.lsp()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.foldcolumn"></a>
+    <strong>M.component.foldcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of components for a foldcolumn section in a statuscolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring foldcolumn and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.foldcolumn()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.numbercolumn"></a>
+    <strong>M.component.numbercolumn(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of components for a numbercolumn section in statuscolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring numbercolumn and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.numbercolumn()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.signcolumn"></a>
+    <strong>M.component.signcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of components for a signcolumn section in statuscolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         options for configuring signcolumn and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.signcolumn()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.component.builder"></a>
+    <strong>M.component.builder(opts)</strong>
+    </dt>
+    <dd>
+    A general function to build a section of astronvim status providers with highlights, conditions, and section surrounding
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         a list of components to build into a section
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).components.builder({ { provider = <span class="string">"file_icon"</span>, opts = { padding = { right = <span class="number">1</span> } } }, { provider = <span class="string">"filename"</span> } })</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.utils.build_provider"></a>
+    <strong>M.utils.build_provider(opts, provider)</strong>
+    </dt>
+    <dd>
+    Convert a component parameter table to a table that can be used with the component builder
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         a table of provider options
+        </li>
+        <li><span class="parameter">provider</span>
+         a provider in <code>M.providers</code>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the provider table that can be used in <a href="../modules/astronvim.utils.status.html#M.component.builder">M.component.builder</a>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.setup_providers"></a>
+    <strong>M.utils.setup_providers(opts, providers, setup)</strong>
+    </dt>
+    <dd>
+    Convert key/value table of options to an array of providers for the component builder
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         the table of options for the components
+        </li>
+        <li><span class="parameter">providers</span>
+         an ordered list like array of providers that are configured in the options table
+        </li>
+        <li><span class="parameter">setup</span>
+         a function that takes provider options table, provider name, provider index and returns the setup provider table, optional, default is <a href="../modules/astronvim.utils.status.html#M.utils.build_provider">M.utils.build_provider</a>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the fully setup options table with the appropriately ordered providers
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.width"></a>
+    <strong>M.utils.width(is_winbar)</strong>
+    </dt>
+    <dd>
+    A utility function to get the width of the bar
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">is_winbar</span>
+         boolean true if you want the width of the winbar, false if you want the statusline width
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the width of the specified bar
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pad_string"></a>
+    <strong>pad_string(str, padding)</strong>
+    </dt>
+    <dd>
+    Add left and/or right padding to a string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         the string to add padding to
+        </li>
+        <li><span class="parameter">padding</span>
+         a table of the format <code>{ left = 0, right = 0}</code> that defines the number of spaces to include to the left and the right of the string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the padded string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.surround"></a>
+    <strong>M.utils.surround(separator, color, component, condition)</strong>
+    </dt>
+    <dd>
+    Surround component with separator and color adjustment
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">separator</span>
+         the separator index to use in <code>M.env.separators</code>
+        </li>
+        <li><span class="parameter">color</span>
+         the color to use as the separator foreground/component background
+        </li>
+        <li><span class="parameter">component</span>
+         the component to surround
+        </li>
+        <li><span class="parameter">condition</span>
+         the condition for displaying the surrounded component
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the new surrounded component
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.encode_pos"></a>
+    <strong>M.utils.encode_pos(line, col, winnr)</strong>
+    </dt>
+    <dd>
+    Encode a position to a single value that can be decoded later
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">line</span>
+         line number of position
+        </li>
+        <li><span class="parameter">col</span>
+         column number of position
+        </li>
+        <li><span class="parameter">winnr</span>
+         a window number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the encoded position
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.decode_pos"></a>
+    <strong>M.utils.decode_pos(c)</strong>
+    </dt>
+    <dd>
+    Decode a previously encoded position to it's sub parts
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+         the encoded position
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        line number, column number, window id
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.null_ls_providers"></a>
+    <strong>M.utils.null_ls_providers(filetype)</strong>
+    </dt>
+    <dd>
+    Get a list of registered null-ls providers for a given filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">filetype</span>
+         the filetype to search null-ls for
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a list of null-ls sources
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.null_ls_sources"></a>
+    <strong>M.utils.null_ls_sources(filetype, method)</strong>
+    </dt>
+    <dd>
+    Get the null-ls sources for a given null-ls method
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">filetype</span>
+         the filetype to search null-ls for
+        </li>
+        <li><span class="parameter">method</span>
+         the null-ls method (check null-ls documentation for available methods)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the available sources for the given filetype and method
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.utils.statuscolumn_clickargs"></a>
+    <strong>M.utils.statuscolumn_clickargs(self, minwid, clicks, button, mods)</strong>
+    </dt>
+    <dd>
+    A helper function for decoding statuscolumn click events with mouse click pressed, modifier keys, as well as which signcolumn sign was clicked if any
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+         the self parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">minwid</span>
+         the minwid parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">clicks</span>
+         the clicks parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">button</span>
+         the button parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">mods</span>
+         the button parameter from Heirline component on_click.callback function call
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the argument table with the decoded mouse information and signcolumn signs information
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { on_click = { callback = <span class="keyword">function</span>(...) <span class="keyword">local</span> args = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.statuscolumn_clickargs(...) <span class="keyword">end</span> } }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.heirline.tab_type"></a>
+    <strong>M.heirline.tab_type(self, prefix)</strong>
+    </dt>
+    <dd>
+    A helper function to get the type a tab or buffer is
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+         the self table from a heirline component function
+        </li>
+        <li><span class="parameter">prefix</span>
+         the prefix of the type, either "tab" or "buffer" (Default: "buffer")
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the string of prefix with the type (i.e. "<em>active" or "</em>visible")
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.heirline.make_buflist"></a>
+    <strong>M.heirline.make_buflist(component)</strong>
+    </dt>
+    <dd>
+    Make a list of buffers, rendering each buffer with the provided component
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">component</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.heirline.make_tablist"></a>
+    <strong>M.heirline.make_tablist(...)</strong>
+    </dt>
+    <dd>
+    Alias to require("heirline.utils").make_tablist
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.heirline.buffer_picker"></a>
+    <strong>M.heirline.buffer_picker(callback)</strong>
+    </dt>
+    <dd>
+    Run the buffer picker and execute the callback function on the selected buffer
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+         function with a single parameter of the buffer number
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "opts"></a>
+    <strong>opts</strong>
+    </dt>
+    <dd>
+    A provider function for showing if paste is enabled
+
+
+    <ul>
+        <li><span class="parameter">opts</span>
+         options passed to the stylize function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2023-03-11 15:21:52 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
