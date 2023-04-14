@@ -191,14 +191,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
-         the git arguments
+         string the git arguments
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command or nil if unsuccessful
+        string|nil # The result of the command or nil if unsuccessful
     </ol>
 
 
@@ -217,7 +217,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the result of running <code>git --help</code>
+        boolean # The result of running <code>git --help</code>
     </ol>
 
 
@@ -236,7 +236,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # ~he result of the command
     </ol>
 
 
@@ -254,14 +254,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">remote</span>
-         the remote to fetch
+         string the remote to fetch
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # The result of the command
     </ol>
 
 
@@ -288,7 +288,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # The result of the command
     </ol>
 
 
@@ -306,14 +306,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">dest</span>
-         the target to checkout
+         string the target to checkout
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # The result of the command
     </ol>
 
 
@@ -338,7 +338,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # The result of the command
     </ol>
 
 
@@ -356,20 +356,20 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">remote</span>
-         the git remote to check
+         string the git remote to check
         </li>
         <li><span class="parameter">branch</span>
-         the git branch to check
+         string the git branch to check
         </li>
         <li><span class="parameter">commit</span>
-         the git commit to check for
+         string the git commit to check for
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        boolean # The result of the command
     </ol>
 
 
@@ -387,14 +387,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">branch</span>
-         the git branch to check
+         string the git branch to check
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the name of the remote for the given branch
+        string|nil # The name of the remote for the given branch
     </ol>
 
 
@@ -412,17 +412,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">remote</span>
-         the remote to add
+         string the remote to add
         </li>
         <li><span class="parameter">url</span>
-         the url of the remote
+         string the url of the remote
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # The result of the command
     </ol>
 
 
@@ -440,17 +440,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">remote</span>
-         the remote to update
+         string the remote to update
         </li>
         <li><span class="parameter">url</span>
-         the new URL of the remote
+         string the new URL of the remote
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # The result of the command
     </ol>
 
 
@@ -468,14 +468,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">remote</span>
-         the remote to get the URL of
+         string the remote to get the URL of
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the url of the remote
+        string|nil # The url of the remote
     </ol>
 
 
@@ -493,17 +493,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">remote</span>
-         the remote to setup branches for
+         string the remote to setup branches for
         </li>
         <li><span class="parameter">branch</span>
-         the branch to setup
+         string the branch to setup
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of the command
+        string|nil # The result of the command
     </ol>
 
 
@@ -530,7 +530,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the current git describe string
+        string|nil # The current git describe string
     </ol>
 
 
@@ -557,7 +557,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the branch of the AstroNvim installation
+        string|nil # The branch of the AstroNvim installation
     </ol>
 
 
@@ -589,7 +589,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the referenced commit
+        string|nil # The referenced commit
     </ol>
 
 
@@ -616,7 +616,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the head string
+        string|nil # the head string
     </ol>
 
 
@@ -634,17 +634,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">remote</span>
-         the remote to check
+         string the remote to check
         </li>
         <li><span class="parameter">branch</span>
-         the branch to check
+         string the branch to check
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the head string of the remote branch
+        string|nil # The head string of the remote branch
     </ol>
 
 
@@ -662,14 +662,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tag</span>
-         the tag to resolve
+         string the tag to resolve
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the commit hash of a git tag
+        string|nil # The commit hash of a git tag
     </ol>
 
 
@@ -687,17 +687,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">start_hash</span>
-         the start commit hash
+        ? string the start commit hash
         </li>
         <li><span class="parameter">end_hash</span>
-         the end commit hash
+        ? string the end commit hash
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        an array like table of commit messages
+        string[] # An array like table of commit messages
     </ol>
 
 
@@ -715,14 +715,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">search</span>
-         a regex to search the tags with (defaults to "v*" for version tags)
+        ? string a regex to search the tags with (defaults to "v*" for version tags)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        an array like table of tags that match the search
+        string[] # An array like table of tags that match the search
     </ol>
 
 
@@ -740,14 +740,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">versions</span>
-         a list of versions to search (defaults to all versions available)
+        ? table a list of versions to search (defaults to all versions available)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the latest version from the array
+        string|nil # The latest version from the array
     </ol>
 
 
@@ -765,14 +765,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
-         the remote to parse to a full git url
+         string the remote to parse to a full git url
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the full git url for the given remote string
+        string # The full git url for the given remote string
     </ol>
 
 
@@ -790,7 +790,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">commit</span>
-         a commit message
+         string a commit message
         </li>
     </ul>
 
@@ -815,14 +815,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">commits</span>
-         an array like table of commit messages
+         string[] an array like table of commit messages
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        an array like table of commits that are breaking
+        string[] # An array like table of commits that are breaking
     </ol>
 
 
@@ -840,14 +840,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">commits</span>
-         an array like table of commit messages
+         string[] an array like table of commit messages
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        an array like table of echo messages to provide to nvim_echo or astronvim.echo
+        string[][] # An array like table of echo messages to provide to nvim_echo or astronvim.echo
     </ol>
 
 
@@ -861,7 +861,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2023-04-03 22:23:16 </i>
+<i style="float:right;">Last updated 2023-04-14 14:56:48 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -86,7 +86,7 @@
 	<td class="summary">Get an icon from <code>lspkind</code> if it is available and return it</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#get_hlgroup">get_hlgroup(name)</a></td>
+	<td class="name" nowrap><a href="#get_hlgroup">get_hlgroup(name, fallback)</a></td>
 	<td class="summary">Get highlight properties for a given highlight name</td>
 	</tr>
 	<tr>
@@ -102,7 +102,7 @@
 	<td class="summary">Open a URL under the cursor with the current operating system</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#toggle_term_cmd">toggle_term_cmd(term_details)</a></td>
+	<td class="name" nowrap><a href="#toggle_term_cmd">toggle_term_cmd(opts)</a></td>
 	<td class="summary">Toggle a user terminal if it exists, if not then create a new one and save it</td>
 	</tr>
 	<tr>
@@ -157,17 +157,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">default</span>
-         the default table that you want to merge into
+        ? table The default table that you want to merge into
         </li>
         <li><span class="parameter">opts</span>
-         the new options that should be merged with the default table
+        ? table The new options that should be merged with the default table
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the merged table
+        table # The merged table
     </ol>
 
 
@@ -185,17 +185,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">lst</span>
-         the list like table that you want to insert into
+         any[] The list like table that you want to insert into
         </li>
         <li><span class="parameter">vals</span>
-         either a list like table of values to be inserted or a single value to be inserted
+         any|any[] Either a list like table of values to be inserted or a single value to be inserted
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the modified list like table
+        any[] # The modified list like table
     </ol>
 
 
@@ -213,13 +213,18 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">func</span>
-         the function to run
+         function The function to run
         </li>
         <li><span class="parameter">condition</span>
-         a boolean value of whether to run the function or not
+         boolean # Whether to run the function or not
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        any|nil result # the result of the function running or nil
+    </ol>
 
 
 
@@ -236,14 +241,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">kind</span>
-         the kind of icon in <code>lspkind</code> to retrieve
+         string The kind of icon in <code>lspkind</code> to retrieve
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the icon
+        string icon
     </ol>
 
 
@@ -252,7 +257,7 @@
 </dd>
     <dt>
     <a name = "get_hlgroup"></a>
-    <strong>get_hlgroup(name)</strong>
+    <strong>get_hlgroup(name, fallback)</strong>
     </dt>
     <dd>
     Get highlight properties for a given highlight name
@@ -261,14 +266,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-         highlight group name
+         string The highlight group name
+        </li>
+        <li><span class="parameter">fallback</span>
+        ? table The fallback highlight properties
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        table of highlight group properties
+        table properties # the highlight group properties
     </ol>
 
 
@@ -286,13 +294,13 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">msg</span>
-         the notification body
+         string The notification body
         </li>
         <li><span class="parameter">type</span>
-         the type of the notification (:help vim.log.levels)
+         number|nil The type of the notification (:help vim.log.levels)
         </li>
         <li><span class="parameter">opts</span>
-         table of nvim-notify options to use (:help notify-options)
+        ? table The nvim-notify options to use (:help notify-options)
         </li>
     </ul>
 
@@ -312,7 +320,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">event</span>
-         the event name to be appended to Astro
+         string The event name to be appended to Astro
         </li>
     </ul>
 
@@ -332,7 +340,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">path</span>
-         the path of the file to open with the system opener
+         string The path of the file to open with the system opener
         </li>
     </ul>
 
@@ -343,7 +351,7 @@
 </dd>
     <dt>
     <a name = "toggle_term_cmd"></a>
-    <strong>toggle_term_cmd(term_details)</strong>
+    <strong>toggle_term_cmd(opts)</strong>
     </dt>
     <dd>
     Toggle a user terminal if it exists, if not then create a new one and save it
@@ -351,8 +359,8 @@
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">term_details</span>
-         a terminal command string or a table of options for Terminal:new() (Check toggleterm.nvim documentation for table format)
+        <li><span class="parameter">opts</span>
+         string|table A terminal command string or a table of options for Terminal:new() (Check toggleterm.nvim documentation for table format)
         </li>
     </ul>
 
@@ -372,17 +380,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">sc</span>
-         the keybinding string to convert to a button
+         string The keybinding string to convert to a button
         </li>
         <li><span class="parameter">txt</span>
-         the explanation text of what the keybinding does
+         string The explanation text of what the keybinding does
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        a button entity table for an alpha configuration
+        table # A button entity table for an alpha configuration
     </ol>
 
 
@@ -400,14 +408,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">plugin</span>
-         the plugin string to search for
+         string The plugin to search for
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        boolean value if the plugin is available
+        boolean available # Whether the plugin is available
     </ol>
 
 
@@ -425,13 +433,13 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">plugin</span>
-         the plugin string to call <code>require(&quot;lazy&quot;).load</code> with
+         string The plugin to call <code>require(&quot;lazy&quot;).load</code> with
         </li>
         <li><span class="parameter">module</span>
-         the system module where the functions live (e.g. <code>vim.ui</code>)
+         table The system module where the functions live (e.g. <code>vim.ui</code>)
         </li>
         <li><span class="parameter">func_names</span>
-         a string or a list like table of strings for functions to wrap in the given module (e.g. <code>{ &quot;ui&quot;, &quot;select }</code>)
+         string|string[] The functions to wrap in the given module (e.g. <code>{ &quot;ui&quot;, &quot;select }</code>)
         </li>
     </ul>
 
@@ -465,10 +473,10 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">map_table</span>
-         A nested table where the first key is the vim mode, the second key is the key to map, and the value is the function to set the mapping to
+         table A nested table where the first key is the vim mode, the second key is the key to map, and the value is the function to set the mapping to
         </li>
         <li><span class="parameter">base</span>
-         A base set of options to set on every keybinding
+        ? table A base set of options to set on every keybinding
         </li>
     </ul>
 
@@ -516,17 +524,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-         the terminal command to execute
+         string The terminal command to execute
         </li>
         <li><span class="parameter">show_error</span>
-         boolean of whether or not to show an unsuccessful command as an error to the user
+        ? boolean Whether or not to show an unsuccessful command as an error to the user
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the result of a successfully executed command or nil
+        string|nil # The result of a successfully executed command or nil
     </ol>
 
 
@@ -540,7 +548,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2023-04-03 22:23:16 </i>
+<i style="float:right;">Last updated 2023-04-14 14:56:48 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

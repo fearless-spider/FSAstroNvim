@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
 </ul>
 
 
@@ -94,8 +95,47 @@
 	<td class="summary">Close all buffers</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#close_left">close_left(force)</a></td>
+	<td class="summary">Close buffers to the left of the current buffer</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#close_right">close_right(force)</a></td>
+	<td class="summary">Close buffers to the right of the current buffer</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sort">sort(compare_func)</a></td>
+	<td class="summary">Sort a the buffers in the current tab based on some comparator</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#close_tab">close_tab()</a></td>
 	<td class="summary">Close the current tab</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.comparator.bufnr">M.comparator.bufnr(bufnr_a, bufnr_b)</a></td>
+	<td class="summary">Comparator of two buffer numbers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.comparator.extension">M.comparator.extension(bufnr_a, bufnr_b)</a></td>
+	<td class="summary">Comparator of two buffer numbers based on the file extensions</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.comparator.full_path">M.comparator.full_path(bufnr_a, bufnr_b)</a></td>
+	<td class="summary">Comparator of two buffer numbers based on the full path</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.comparator.unique_path">M.comparator.unique_path(bufnr_a, bufnr_b)</a></td>
+	<td class="summary">Comparator of two buffers based on their unique path</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.comparator.modified">M.comparator.modified(bufnr_a, bufnr_b)</a></td>
+	<td class="summary">Comparator of two buffers based on modification date</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#comparator">comparator</a></td>
+	<td class="summary">A table of buffer comparator functions</td>
 	</tr>
 </table>
 
@@ -117,14 +157,14 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">bufnr</span>
-         the buffer to check
+         number The buffer to check
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        true if the buffer is valid or false
+        boolean # Whether the buffer is valid or not
     </ol>
 
 
@@ -142,7 +182,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">n</span>
-         number of tabs to move the current buffer over by (positive = right, negative = left)
+         number The number of tabs to move the current buffer over by (positive = right, negative = left)
         </li>
     </ul>
 
@@ -162,7 +202,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">n</span>
-         the number of tabs to navigate to (positive = right, negative = left)
+         number The number of tabs to navigate to (positive = right, negative = left)
         </li>
     </ul>
 
@@ -182,7 +222,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tabnr</span>
-         the position of the buffer to navigate to
+         number The position of the buffer to navigate to
         </li>
     </ul>
 
@@ -202,10 +242,10 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">bufnr</span>
-        ? the buffer number to close or the current buffer if not provided
+        ? number The buffer to close or the current buffer if not provided
         </li>
         <li><span class="parameter">force</span>
-        ? whether or not to foce close the buffers or confirm changes (default: false)
+        ? boolean Whether or not to foce close the buffers or confirm changes (default: false)
         </li>
     </ul>
 
@@ -225,13 +265,78 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">keep_current</span>
-        ? whether or not to keep the current buffer (default: false)
+        ? boolean Whether or not to keep the current buffer (default: false)
         </li>
         <li><span class="parameter">force</span>
-        ? whether or not to foce close the buffers or confirm changes (default: false)
+        ? boolean Whether or not to foce close the buffers or confirm changes (default: false)
         </li>
     </ul>
 
+
+
+
+
+</dd>
+    <dt>
+    <a name = "close_left"></a>
+    <strong>close_left(force)</strong>
+    </dt>
+    <dd>
+    Close buffers to the left of the current buffer
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">force</span>
+        ? boolean Whether or not to foce close the buffers or confirm changes (default: false)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "close_right"></a>
+    <strong>close_right(force)</strong>
+    </dt>
+    <dd>
+    Close buffers to the right of the current buffer
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">force</span>
+        ? boolean Whether or not to foce close the buffers or confirm changes (default: false)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sort"></a>
+    <strong>sort(compare_func)</strong>
+    </dt>
+    <dd>
+    Sort a the buffers in the current tab based on some comparator
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">compare_func</span>
+         string|function a string of a comparator defined in require("astronvim.utils.buffer").comparator or a custom comparator function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # Whether or not the buffers were sorted
+    </ol>
 
 
 
@@ -251,6 +356,164 @@
 
 
 </dd>
+    <dt>
+    <a name = "M.comparator.bufnr"></a>
+    <strong>M.comparator.bufnr(bufnr_a, bufnr_b)</strong>
+    </dt>
+    <dd>
+    Comparator of two buffer numbers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr_a</span>
+         integer buffer number A
+        </li>
+        <li><span class="parameter">bufnr_b</span>
+         integer buffer number B
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean comparison true if A is sorted before B, false if B should be sorted before A
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.comparator.extension"></a>
+    <strong>M.comparator.extension(bufnr_a, bufnr_b)</strong>
+    </dt>
+    <dd>
+    Comparator of two buffer numbers based on the file extensions
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr_a</span>
+         integer buffer number A
+        </li>
+        <li><span class="parameter">bufnr_b</span>
+         integer buffer number B
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean comparison true if A is sorted before B, false if B should be sorted before A
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.comparator.full_path"></a>
+    <strong>M.comparator.full_path(bufnr_a, bufnr_b)</strong>
+    </dt>
+    <dd>
+    Comparator of two buffer numbers based on the full path
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr_a</span>
+         integer buffer number A
+        </li>
+        <li><span class="parameter">bufnr_b</span>
+         integer buffer number B
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean comparison true if A is sorted before B, false if B should be sorted before A
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.comparator.unique_path"></a>
+    <strong>M.comparator.unique_path(bufnr_a, bufnr_b)</strong>
+    </dt>
+    <dd>
+    Comparator of two buffers based on their unique path
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr_a</span>
+         integer buffer number A
+        </li>
+        <li><span class="parameter">bufnr_b</span>
+         integer buffer number B
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean comparison true if A is sorted before B, false if B should be sorted before A
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "M.comparator.modified"></a>
+    <strong>M.comparator.modified(bufnr_a, bufnr_b)</strong>
+    </dt>
+    <dd>
+    Comparator of two buffers based on modification date
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr_a</span>
+         integer buffer number A
+        </li>
+        <li><span class="parameter">bufnr_b</span>
+         integer buffer number B
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean comparison true if A is sorted before B, false if B should be sorted before A
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "comparator"></a>
+    <strong>comparator</strong>
+    </dt>
+    <dd>
+    A table of buffer comparator functions
+
+
+
+
+
+
+
+</dd>
 </dl>
 
 
@@ -258,7 +521,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2023-04-03 22:23:16 </i>
+<i style="float:right;">Last updated 2023-04-14 14:56:48 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
