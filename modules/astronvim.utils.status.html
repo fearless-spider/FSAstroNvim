@@ -26,6 +26,7 @@
 <br/>
 <h1>AstroNvim</h1>
 
+
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
@@ -138,6 +139,10 @@
 	<td class="summary">A provider function for displaying if a macro is currently being recorded</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#M.provider.showcmd">M.provider.showcmd(opts)</a></td>
+	<td class="summary">A provider function for displaying the current command</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#M.provider.search_count">M.provider.search_count(opts)</a></td>
 	<td class="summary">A provider function for displaying the current search count</td>
 	</tr>
@@ -228,6 +233,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#M.condition.is_hlsearch">M.condition.is_hlsearch()</a></td>
 	<td class="summary">A condition function if search is visible</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#M.condition.is_statusline_showcmd">M.condition.is_statusline_showcmd()</a></td>
+	<td class="summary">A condition function if showcmdloc is set to statusline</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#M.condition.is_git_repo">M.condition.is_git_repo(bufnr)</a></td>
@@ -480,7 +489,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"heirline.utils"</span>).surround({ <span class="string">"|"</span>, <span class="string">"|"</span> }, <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.mode_bg, heirline_component),</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"heirline.utils"</span>).<span class="function-name">surround</span>({ <span class="string">"|"</span>, <span class="string">"|"</span> }, <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.mode_bg, heirline_component),</pre>
     </ul>
 
 </dd>
@@ -511,7 +520,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.fileicon(), hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.filetype_color },</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">fileicon</span>(), hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.filetype_color },</pre>
     </ul>
 
 </dd>
@@ -543,7 +552,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.get_attributes(<span class="string">"treesitter"</span>) },</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.<span class="function-name">get_attributes</span>(<span class="string">"treesitter"</span>) },</pre>
     </ul>
 
 </dd>
@@ -572,7 +581,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.file_icon(<span class="string">"winbar"</span>) },</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.<span class="function-name">file_icon</span>(<span class="string">"winbar"</span>) },</pre>
     </ul>
 
 </dd>
@@ -601,7 +610,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.breadcrumbs { padding = { left = <span class="number">1</span> } } }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.<span class="function-name">breadcrumbs</span> { padding = { left = <span class="number">1</span> } } }</pre>
     </ul>
 
 </dd>
@@ -630,7 +639,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.separated_path { padding = { left = <span class="number">1</span> } } }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.<span class="function-name">separated_path</span> { padding = { left = <span class="number">1</span> } } }</pre>
     </ul>
 
 </dd>
@@ -659,7 +668,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.update_events { <span class="string">"BufEnter"</span>, { <span class="string">"User"</span>, pattern = <span class="string">"LspProgressUpdate"</span> } } }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.<span class="function-name">update_events</span> { <span class="string">"BufEnter"</span>, { <span class="string">"User"</span>, pattern = <span class="string">"LspProgressUpdate"</span> } } }</pre>
     </ul>
 
 </dd>
@@ -801,7 +810,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.tabnr() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">tabnr</span>() }</pre>
     </ul>
 
 </dd>
@@ -833,7 +842,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.spell() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">spell</span>() }</pre>
     </ul>
 
 </dd>
@@ -865,7 +874,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.paste() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">paste</span>() }</pre>
     </ul>
 
 </dd>
@@ -897,7 +906,39 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.macro_recording() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">macro_recording</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.provider.showcmd"></a>
+    <strong>M.provider.showcmd(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying the current command
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table of options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the statusline string for showing the current command
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">showcmd</span>() }</pre>
     </ul>
 
 </dd>
@@ -929,7 +970,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.search_count() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">search_count</span>() }</pre>
     </ul>
 
 </dd>
@@ -961,7 +1002,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.mode_text() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">mode_text</span>() }</pre>
     </ul>
 
 </dd>
@@ -993,7 +1034,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.percentage() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">percentage</span>() }</pre>
     </ul>
 
 </dd>
@@ -1025,7 +1066,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.ruler({ pad_ruler = { line = <span class="number">3</span>, char = <span class="number">2</span> } }) }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">ruler</span>({ pad_ruler = { line = <span class="number">3</span>, char = <span class="number">2</span> } }) }</pre>
     </ul>
 
 </dd>
@@ -1057,7 +1098,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.scrollbar() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">scrollbar</span>() }</pre>
     </ul>
 
 </dd>
@@ -1089,7 +1130,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.close_button() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">close_button</span>() }</pre>
     </ul>
 
 </dd>
@@ -1121,7 +1162,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.filetype() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">filetype</span>() }</pre>
     </ul>
 
 </dd>
@@ -1153,7 +1194,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.filename() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">filename</span>() }</pre>
     </ul>
 
 </dd>
@@ -1185,7 +1226,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.unique_path() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">unique_path</span>() }</pre>
     </ul>
 
 </dd>
@@ -1217,7 +1258,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.file_modified() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_modified</span>() }</pre>
     </ul>
 
 </dd>
@@ -1249,7 +1290,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.file_read_only() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_read_only</span>() }</pre>
     </ul>
 
 </dd>
@@ -1281,7 +1322,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.file_icon() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_icon</span>() }</pre>
     </ul>
 
 </dd>
@@ -1313,7 +1354,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.git_branch() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">git_branch</span>() }</pre>
     </ul>
 
 </dd>
@@ -1345,7 +1386,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.git_diff({ <span class="global">type</span> = <span class="string">"added"</span> }) }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">git_diff</span>({ <span class="global">type</span> = <span class="string">"added"</span> }) }</pre>
     </ul>
 
 </dd>
@@ -1377,7 +1418,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.diagnostics({ severity = <span class="string">"ERROR"</span> }) }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">diagnostics</span>({ severity = <span class="string">"ERROR"</span> }) }</pre>
     </ul>
 
 </dd>
@@ -1409,7 +1450,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.lsp_progress() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">lsp_progress</span>() }</pre>
     </ul>
 
 </dd>
@@ -1441,7 +1482,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.lsp_client_names({ expand_null_ls = <span class="keyword">true</span>, truncate = <span class="number">0.25</span> }) }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">lsp_client_names</span>({ expand_null_ls = <span class="keyword">true</span>, truncate = <span class="number">0.25</span> }) }</pre>
     </ul>
 
 </dd>
@@ -1473,7 +1514,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.treesitter_status() }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">treesitter_status</span>() }</pre>
     </ul>
 
 </dd>
@@ -1505,7 +1546,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.str({ str = <span class="string">"Hello"</span> }) }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">str</span>({ str = <span class="string">"Hello"</span> }) }</pre>
     </ul>
 
 </dd>
@@ -1560,7 +1601,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="keyword">function</span>() <span class="keyword">return</span> <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.buffer_matches { buftype = { <span class="string">"terminal"</span> } } <span class="keyword">end</span> }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="keyword">function</span>() <span class="keyword">return</span> <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.<span class="function-name">buffer_matches</span> { buftype = { <span class="string">"terminal"</span> } } <span class="keyword">end</span> }</pre>
     </ul>
 
 </dd>
@@ -1607,6 +1648,29 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_hlsearch }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "M.condition.is_statusline_showcmd"></a>
+    <strong>M.condition.is_statusline_showcmd()</strong>
+    </dt>
+    <dd>
+    A condition function if showcmdloc is set to statusline
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not statusline showcmd is enabled
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_statusline_showcmd }</pre>
     </ul>
 
 </dd>
@@ -1804,7 +1868,7 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.aerial_available }
- <span class="keyword">function</span> M.condition.aerial_available() <span class="keyword">return</span> is_available <span class="string">"aerial.nvim"</span> <span class="keyword">end</span></pre>
+ <span class="keyword">function</span> M.condition.<span class="function-name">aerial_available</span>() <span class="keyword">return</span> <span class="function-name">is_available</span> <span class="string">"aerial.nvim"</span> <span class="keyword">end</span></pre>
     </ul>
 
 </dd>
@@ -1932,7 +1996,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="global">string</span> = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.stylize(<span class="string">"Hello"</span>, { padding = { left = <span class="number">1</span>, right = <span class="number">1</span> }, icon = { kind = <span class="string">"String"</span> } })</pre>
+        <pre class="example"><span class="keyword">local</span> <span class="global">string</span> = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.<span class="function-name">stylize</span>(<span class="string">"Hello"</span>, { padding = { left = <span class="number">1</span>, right = <span class="number">1</span> }, icon = { kind = <span class="string">"String"</span> } })</pre>
     </ul>
 
 </dd>
@@ -1961,7 +2025,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.fill()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">fill</span>()</pre>
     </ul>
 
 </dd>
@@ -1990,7 +2054,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.file_info()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">file_info</span>()</pre>
     </ul>
 
 </dd>
@@ -2019,7 +2083,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.tabline_file_info()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">tabline_file_info</span>()</pre>
     </ul>
 
 </dd>
@@ -2048,7 +2112,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.nav()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">nav</span>()</pre>
     </ul>
 
 </dd>
@@ -2077,7 +2141,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.cmd_info()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">cmd_info</span>()</pre>
     </ul>
 
 </dd>
@@ -2106,7 +2170,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.mode { mode_text = <span class="keyword">true</span> }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">mode</span> { mode_text = <span class="keyword">true</span> }</pre>
     </ul>
 
 </dd>
@@ -2135,7 +2199,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.breadcumbs()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">breadcumbs</span>()</pre>
     </ul>
 
 </dd>
@@ -2164,7 +2228,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.separated_path()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">separated_path</span>()</pre>
     </ul>
 
 </dd>
@@ -2193,7 +2257,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.git_branch()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">git_branch</span>()</pre>
     </ul>
 
 </dd>
@@ -2222,7 +2286,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.git_diff()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">git_diff</span>()</pre>
     </ul>
 
 </dd>
@@ -2251,7 +2315,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.diagnostics()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">diagnostics</span>()</pre>
     </ul>
 
 </dd>
@@ -2280,7 +2344,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.treesitter()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">treesitter</span>()</pre>
     </ul>
 
 </dd>
@@ -2309,7 +2373,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.lsp()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">lsp</span>()</pre>
     </ul>
 
 </dd>
@@ -2338,7 +2402,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.foldcolumn()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">foldcolumn</span>()</pre>
     </ul>
 
 </dd>
@@ -2367,7 +2431,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.numbercolumn()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">numbercolumn</span>()</pre>
     </ul>
 
 </dd>
@@ -2396,7 +2460,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.signcolumn()</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">signcolumn</span>()</pre>
     </ul>
 
 </dd>
@@ -2425,7 +2489,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).components.builder({ { provider = <span class="string">"file_icon"</span>, opts = { padding = { right = <span class="number">1</span> } } }, { provider = <span class="string">"filename"</span> } })</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).components.<span class="function-name">builder</span>({ { provider = <span class="string">"file_icon"</span>, opts = { padding = { right = <span class="number">1</span> } } }, { provider = <span class="string">"filename"</span> } })</pre>
     </ul>
 
 </dd>
@@ -2721,7 +2785,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> heirline_component = { on_click = { callback = <span class="keyword">function</span>(...) <span class="keyword">local</span> args = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.statuscolumn_clickargs(...) <span class="keyword">end</span> } }</pre>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { on_click = { callback = <span class="keyword">function</span>(...) <span class="keyword">local</span> args = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.<span class="function-name">statuscolumn_clickargs</span>(...) <span class="keyword">end</span> } }</pre>
     </ul>
 
 </dd>
@@ -2826,8 +2890,8 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2023-05-01 13:00:45 </i>
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-08 17:24:58 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
