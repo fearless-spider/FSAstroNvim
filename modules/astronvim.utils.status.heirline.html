@@ -44,11 +44,11 @@
   <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
   <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
   <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
-  <li><strong>astronvim.utils.mason</strong></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
   <li><a href="../modules/astronvim.utils.status.component.html">astronvim.utils.status.component</a></li>
   <li><a href="../modules/astronvim.utils.status.condition.html">astronvim.utils.status.condition</a></li>
   <li><a href="../modules/astronvim.utils.status.env.html">astronvim.utils.status.env</a></li>
-  <li><a href="../modules/astronvim.utils.status.heirline.html">astronvim.utils.status.heirline</a></li>
+  <li><strong>astronvim.utils.status.heirline</strong></li>
   <li><a href="../modules/astronvim.utils.status.hl.html">astronvim.utils.status.hl</a></li>
   <li><a href="../modules/astronvim.utils.status.init.html">astronvim.utils.status.init</a></li>
   <li><a href="../modules/astronvim.utils.status.provider.html">astronvim.utils.status.provider</a></li>
@@ -61,20 +61,16 @@
 
 <div id="content">
 
-<h1>Module <code>astronvim.utils.mason</code></h1>
+<h1>Module <code>astronvim.utils.status.heirline</code></h1>
 <p>
-<h3>Mason Utils</h3>
-
-<p> Mason related utility functions to use within AstroNvim and user configurations.</p>
+<h3>AstroNvim Status Heirline Extensions</h3>
 </p>
-<p> This module can be loaded with <code>local mason_utils = require(&quot;astronvim.utils.mason&quot;)</code></p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/astronvim.utils.html#">astronvim.utils</a>
-    </ul>
+<p> Statusline related heirline specific extensions</p>
+
+<p> This module can be loaded with <code>local astro_heirline = require &quot;astronvim.utils.status.heirline&quot;</code></p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2022</li>
+        <li><strong>Copyright</strong>: 2023</li>
         <li><strong>License</strong>: GNU General Public License v3.0</li>
     </ul>
 
@@ -82,12 +78,20 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#update">update(pkg_names, auto_install)</a></td>
-	<td class="summary">Update specified mason packages, or just update the registries if no packages are listed</td>
+	<td class="name" nowrap><a href="#tab_type">tab_type(self, prefix)</a></td>
+	<td class="summary">A helper function to get the type a tab or buffer is</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#update_all">update_all()</a></td>
-	<td class="summary">Update all packages in Mason</td>
+	<td class="name" nowrap><a href="#make_buflist">make_buflist(component)</a></td>
+	<td class="summary">Make a list of buffers, rendering each buffer with the provided component</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#make_tablist">make_tablist(...)</a></td>
+	<td class="summary">Alias to require("heirline.utils").make_tablist</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#buffer_picker">buffer_picker(callback)</a></td>
+	<td class="summary">Run the buffer picker and execute the callback function on the selected buffer</td>
 	</tr>
 </table>
 
@@ -99,20 +103,72 @@
 
     <dl class="function">
     <dt>
-    <a name = "update"></a>
-    <strong>update(pkg_names, auto_install)</strong>
+    <a name = "tab_type"></a>
+    <strong>tab_type(self, prefix)</strong>
     </dt>
     <dd>
-    Update specified mason packages, or just update the registries if no packages are listed
+    A helper function to get the type a tab or buffer is
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">pkg_names</span>
-        ? string|string[] The package names as defined in Mason (Not mason-lspconfig or mason-null-ls) if the value is nil then it will just update the registries
+        <li><span class="parameter">self</span>
+         table the self table from a heirline component function
         </li>
-        <li><span class="parameter">auto_install</span>
-        ? boolean whether or not to install a package that is not currently installed (default: True)
+        <li><span class="parameter">prefix</span>
+        ? string the prefix of the type, either "tab" or "buffer" (Default: "buffer")
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the string of prefix with the type (i.e. "<em>active" or "</em>visible")
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "make_buflist"></a>
+    <strong>make_buflist(component)</strong>
+    </dt>
+    <dd>
+    Make a list of buffers, rendering each buffer with the provided component
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">component</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "make_tablist"></a>
+    <strong>make_tablist(...)</strong>
+    </dt>
+    <dd>
+    Alias to require("heirline.utils").make_tablist
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+
+
+
         </li>
     </ul>
 
@@ -122,13 +178,19 @@
 
 </dd>
     <dt>
-    <a name = "update_all"></a>
-    <strong>update_all()</strong>
+    <a name = "buffer_picker"></a>
+    <strong>buffer_picker(callback)</strong>
     </dt>
     <dd>
-    Update all packages in Mason
+    Run the buffer picker and execute the callback function on the selected buffer
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callback</span>
+         function with a single parameter of the buffer number
+        </li>
+    </ul>
 
 
 

@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.component.html">astronvim.utils.status.component</a></li>
+  <li><strong>astronvim.utils.status.condition</strong></li>
+  <li><a href="../modules/astronvim.utils.status.env.html">astronvim.utils.status.env</a></li>
+  <li><a href="../modules/astronvim.utils.status.heirline.html">astronvim.utils.status.heirline</a></li>
+  <li><a href="../modules/astronvim.utils.status.hl.html">astronvim.utils.status.hl</a></li>
+  <li><a href="../modules/astronvim.utils.status.init.html">astronvim.utils.status.init</a></li>
+  <li><a href="../modules/astronvim.utils.status.provider.html">astronvim.utils.status.provider</a></li>
+  <li><a href="../modules/astronvim.utils.status.utils.html">astronvim.utils.status.utils</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.status.condition</code></h1>
+<p>
+<h3>AstroNvim Status Conditions</h3>
+</p>
+<p> Statusline related condition functions to use with Heirline</p>
+
+<p> This module can be loaded with <code>local condition = require &quot;astronvim.utils.status.condition&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2023</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#is_active">is_active()</a></td>
+	<td class="summary">A condition function if the window is currently active</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#buffer_matches">buffer_matches(patterns, bufnr)</a></td>
+	<td class="summary">A condition function if the buffer filetype,buftype,bufname match a pattern</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_macro_recording">is_macro_recording()</a></td>
+	<td class="summary">A condition function if a macro is being recorded</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_hlsearch">is_hlsearch()</a></td>
+	<td class="summary">A condition function if search is visible</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_statusline_showcmd">is_statusline_showcmd()</a></td>
+	<td class="summary">A condition function if showcmdloc is set to statusline</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_git_repo">is_git_repo(bufnr)</a></td>
+	<td class="summary">A condition function if the current file is in a git repo</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#git_changed">git_changed(bufnr)</a></td>
+	<td class="summary">A condition function if there are any git changes</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_modified">file_modified(bufnr)</a></td>
+	<td class="summary">A condition function if the current buffer is modified</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_read_only">file_read_only(bufnr)</a></td>
+	<td class="summary">A condition function if the current buffer is read only</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#has_diagnostics">has_diagnostics(bufnr)</a></td>
+	<td class="summary">A condition function if the current file has any diagnostics</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#has_filetype">has_filetype(bufnr)</a></td>
+	<td class="summary">A condition function if there is a defined filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#aerial_available">aerial_available()</a></td>
+	<td class="summary">A condition function if Aerial is available</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#lsp_attached">lsp_attached(bufnr)</a></td>
+	<td class="summary">A condition function if LSP is attached</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#treesitter_available">treesitter_available(bufnr)</a></td>
+	<td class="summary">A condition function if treesitter is in use</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#foldcolumn_enabled">foldcolumn_enabled()</a></td>
+	<td class="summary">A condition function if the foldcolumn is enabled</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#numbercolumn_enabled">numbercolumn_enabled()</a></td>
+	<td class="summary">A condition function if the number column is enabled</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "is_active"></a>
+    <strong>is_active()</strong>
+    </dt>
+    <dd>
+    A condition function if the window is currently active
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not the window is currently actie
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_active }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "buffer_matches"></a>
+    <strong>buffer_matches(patterns, bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the buffer filetype,buftype,bufname match a pattern
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">patterns</span>
+         table the table of patterns to match
+        </li>
+        <li><span class="parameter">bufnr</span>
+         number of the buffer to match (Default: 0 [current])
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not LSP is attached
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="keyword">function</span>() <span class="keyword">return</span> <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.<span class="function-name">buffer_matches</span> { buftype = { <span class="string">"terminal"</span> } } <span class="keyword">end</span> }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "is_macro_recording"></a>
+    <strong>is_macro_recording()</strong>
+    </dt>
+    <dd>
+    A condition function if a macro is being recorded
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not a macro is currently being recorded
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_macro_recording }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "is_hlsearch"></a>
+    <strong>is_hlsearch()</strong>
+    </dt>
+    <dd>
+    A condition function if search is visible
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not searching is currently visible
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_hlsearch }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "is_statusline_showcmd"></a>
+    <strong>is_statusline_showcmd()</strong>
+    </dt>
+    <dd>
+    A condition function if showcmdloc is set to statusline
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not statusline showcmd is enabled
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_statusline_showcmd }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "is_git_repo"></a>
+    <strong>is_git_repo(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current file is in a git repo
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not the current file is in a git repo
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.is_git_repo }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "git_changed"></a>
+    <strong>git_changed(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if there are any git changes
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not there are any git changes
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.git_changed }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_modified"></a>
+    <strong>file_modified(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current buffer is modified
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not the current buffer is modified
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.file_modified }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_read_only"></a>
+    <strong>file_read_only(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current buffer is read only
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not the current buffer is read only or not modifiable
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.file_read_only }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "has_diagnostics"></a>
+    <strong>has_diagnostics(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if the current file has any diagnostics
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not the current file has any diagnostics
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.has_diagnostics }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "has_filetype"></a>
+    <strong>has_filetype(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if there is a defined filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not there is a filetype
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.has_filetype }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "aerial_available"></a>
+    <strong>aerial_available()</strong>
+    </dt>
+    <dd>
+    A condition function if Aerial is available
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not aerial plugin is installed
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.aerial_available }
+ <span class="keyword">function</span> M.<span class="function-name">aerial_available</span>() <span class="keyword">return</span> <span class="function-name">is_available</span> <span class="string">"aerial.nvim"</span> <span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "lsp_attached"></a>
+    <strong>lsp_attached(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if LSP is attached
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not LSP is attached
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.lsp_attached }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "treesitter_available"></a>
+    <strong>treesitter_available(bufnr)</strong>
+    </dt>
+    <dd>
+    A condition function if treesitter is in use
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bufnr</span>
+         table|integer a buffer number to check the condition for, a table with bufnr property, or nil to get the current buffer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # whether or not treesitter is active
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, condition = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).condition.treesitter_available }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "foldcolumn_enabled"></a>
+    <strong>foldcolumn_enabled()</strong>
+    </dt>
+    <dd>
+    A condition function if the foldcolumn is enabled
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # true if vim.opt.foldcolumn > 0, false if vim.opt.foldcolumn == 0
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "numbercolumn_enabled"></a>
+    <strong>numbercolumn_enabled()</strong>
+    </dt>
+    <dd>
+    A condition function if the number column is enabled
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean # true if vim.opt.number or vim.opt.relativenumber, false if neither
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-06-11 15:17:55 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

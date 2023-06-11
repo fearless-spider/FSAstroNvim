@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.component.html">astronvim.utils.status.component</a></li>
+  <li><a href="../modules/astronvim.utils.status.condition.html">astronvim.utils.status.condition</a></li>
+  <li><a href="../modules/astronvim.utils.status.env.html">astronvim.utils.status.env</a></li>
+  <li><a href="../modules/astronvim.utils.status.heirline.html">astronvim.utils.status.heirline</a></li>
+  <li><a href="../modules/astronvim.utils.status.hl.html">astronvim.utils.status.hl</a></li>
+  <li><a href="../modules/astronvim.utils.status.init.html">astronvim.utils.status.init</a></li>
+  <li><a href="../modules/astronvim.utils.status.provider.html">astronvim.utils.status.provider</a></li>
+  <li><strong>astronvim.utils.status.utils</strong></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.status.utils</code></h1>
+<p>
+<h3>AstroNvim Status Utilities</h3>
+</p>
+<p> Statusline related uitility functions</p>
+
+<p> This module can be loaded with <code>local status_utils = require &quot;astronvim.utils.status.utils&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2023</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#build_provider">build_provider(opts, provider)</a></td>
+	<td class="summary">Convert a component parameter table to a table that can be used with the component builder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setup_providers">setup_providers(opts, providers, setup)</a></td>
+	<td class="summary">Convert key/value table of options to an array of providers for the component builder</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#width">width(is_winbar)</a></td>
+	<td class="summary">A utility function to get the width of the bar</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pad_string">pad_string(str, padding)</a></td>
+	<td class="summary">Add left and/or right padding to a string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stylize">stylize(str, opts)</a></td>
+	<td class="summary">A utility function to stylize a string with an icon from lspkind, separators, and left/right padding</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#surround">surround(separator, color, component, condition)</a></td>
+	<td class="summary">Surround component with separator and color adjustment</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#encode_pos">encode_pos(line, col, winnr)</a></td>
+	<td class="summary">Encode a position to a single value that can be decoded later</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#decode_pos">decode_pos(c)</a></td>
+	<td class="summary">Decode a previously encoded position to it's sub parts</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#null_ls_providers">null_ls_providers(filetype)</a></td>
+	<td class="summary">Get a list of registered null-ls providers for a given filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#null_ls_sources">null_ls_sources(filetype, method)</a></td>
+	<td class="summary">Get the null-ls sources for a given null-ls method</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#statuscolumn_clickargs">statuscolumn_clickargs(self, minwid, clicks, button, mods)</a></td>
+	<td class="summary">A helper function for decoding statuscolumn click events with mouse click pressed, modifier keys, as well as which signcolumn sign was clicked if any</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "build_provider"></a>
+    <strong>build_provider(opts, provider)</strong>
+    </dt>
+    <dd>
+    Convert a component parameter table to a table that can be used with the component builder
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table a table of provider options
+        </li>
+        <li><span class="parameter">provider</span>
+        ? function|string a provider in <code>M.providers</code>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table|false # the provider table that can be used in <code>M.component.builder</code>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setup_providers"></a>
+    <strong>setup_providers(opts, providers, setup)</strong>
+    </dt>
+    <dd>
+    Convert key/value table of options to an array of providers for the component builder
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         table the table of options for the components
+        </li>
+        <li><span class="parameter">providers</span>
+         string[] an ordered list like array of providers that are configured in the options table
+        </li>
+        <li><span class="parameter">setup</span>
+        ? function a function that takes provider options table, provider name, provider index and returns the setup provider table, optional, default is <code>M.build_provider</code>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # the fully setup options table with the appropriately ordered providers
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "width"></a>
+    <strong>width(is_winbar)</strong>
+    </dt>
+    <dd>
+    A utility function to get the width of the bar
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">is_winbar</span>
+        ? boolean true if you want the width of the winbar, false if you want the statusline width
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        integer # the width of the specified bar
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pad_string"></a>
+    <strong>pad_string(str, padding)</strong>
+    </dt>
+    <dd>
+    Add left and/or right padding to a string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string the string to add padding to
+        </li>
+        <li><span class="parameter">padding</span>
+         table a table of the format <code>{ left = 0, right = 0}</code> that defines the number of spaces to include to the left and the right of the string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the padded string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "stylize"></a>
+    <strong>stylize(str, opts)</strong>
+    </dt>
+    <dd>
+    A utility function to stylize a string with an icon from lspkind, separators, and left/right padding
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+        ? string the string to stylize
+        </li>
+        <li><span class="parameter">opts</span>
+        ? table options of <code>{ padding = { left = 0, right = 0 }, separator = { left = &quot;|&quot;, right = &quot;|&quot; }, escape = true, show_empty = false, icon = { kind = &quot;NONE&quot;, padding = { left = 0, right = 0 } } }</code>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the stylized string
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> <span class="global">string</span> = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.<span class="function-name">stylize</span>(<span class="string">"Hello"</span>, { padding = { left = <span class="number">1</span>, right = <span class="number">1</span> }, icon = { kind = <span class="string">"String"</span> } })</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "surround"></a>
+    <strong>surround(separator, color, component, condition)</strong>
+    </dt>
+    <dd>
+    Surround component with separator and color adjustment
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">separator</span>
+         string|string[] the separator index to use in <code>env.separators</code>
+        </li>
+        <li><span class="parameter">color</span>
+         function|string|table the color to use as the separator foreground/component background
+        </li>
+        <li><span class="parameter">component</span>
+         table the component to surround
+        </li>
+        <li><span class="parameter">condition</span>
+         boolean|function the condition for displaying the surrounded component
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # the new surrounded component
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "encode_pos"></a>
+    <strong>encode_pos(line, col, winnr)</strong>
+    </dt>
+    <dd>
+    Encode a position to a single value that can be decoded later
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">line</span>
+         integer line number of position
+        </li>
+        <li><span class="parameter">col</span>
+         integer column number of position
+        </li>
+        <li><span class="parameter">winnr</span>
+         integer a window number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        integer the encoded position
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "decode_pos"></a>
+    <strong>decode_pos(c)</strong>
+    </dt>
+    <dd>
+    Decode a previously encoded position to it's sub parts
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+         integer the encoded position
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        integer line, integer column, integer window
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "null_ls_providers"></a>
+    <strong>null_ls_providers(filetype)</strong>
+    </dt>
+    <dd>
+    Get a list of registered null-ls providers for a given filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">filetype</span>
+         string the filetype to search null-ls for
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # a table of null-ls sources
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "null_ls_sources"></a>
+    <strong>null_ls_sources(filetype, method)</strong>
+    </dt>
+    <dd>
+    Get the null-ls sources for a given null-ls method
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">filetype</span>
+         string the filetype to search null-ls for
+        </li>
+        <li><span class="parameter">method</span>
+         string the null-ls method (check null-ls documentation for available methods)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string[] # the available sources for the given filetype and method
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "statuscolumn_clickargs"></a>
+    <strong>statuscolumn_clickargs(self, minwid, clicks, button, mods)</strong>
+    </dt>
+    <dd>
+    A helper function for decoding statuscolumn click events with mouse click pressed, modifier keys, as well as which signcolumn sign was clicked if any
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+         any the self parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">minwid</span>
+         any the minwid parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">clicks</span>
+         any the clicks parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">button</span>
+         any the button parameter from Heirline component on_click.callback function call
+        </li>
+        <li><span class="parameter">mods</span>
+         any the button parameter from Heirline component on_click.callback function call
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # the argument table with the decoded mouse information and signcolumn signs information
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { on_click = { callback = <span class="keyword">function</span>(...) <span class="keyword">local</span> args = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).utils.<span class="function-name">statuscolumn_clickargs</span>(...) <span class="keyword">end</span> } }</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-06-11 15:17:55 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

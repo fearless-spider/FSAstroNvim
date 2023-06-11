@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.component.html">astronvim.utils.status.component</a></li>
+  <li><a href="../modules/astronvim.utils.status.condition.html">astronvim.utils.status.condition</a></li>
+  <li><a href="../modules/astronvim.utils.status.env.html">astronvim.utils.status.env</a></li>
+  <li><a href="../modules/astronvim.utils.status.heirline.html">astronvim.utils.status.heirline</a></li>
+  <li><strong>astronvim.utils.status.hl</strong></li>
+  <li><a href="../modules/astronvim.utils.status.init.html">astronvim.utils.status.init</a></li>
+  <li><a href="../modules/astronvim.utils.status.provider.html">astronvim.utils.status.provider</a></li>
+  <li><a href="../modules/astronvim.utils.status.utils.html">astronvim.utils.status.utils</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.status.hl</code></h1>
+<p>
+<h3>AstroNvim Status Highlighting</h3>
+</p>
+<p> Statusline related highlighting utilities</p>
+
+<p> This module can be loaded with <code>local hl = require &quot;astronvim.utils.status.hl&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2023</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#lualine_mode">lualine_mode(mode, fallback)</a></td>
+	<td class="summary">Get the highlight background color of the lualine theme for the current colorscheme</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#mode">mode()</a></td>
+	<td class="summary">Get the highlight for the current mode</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#mode_bg">mode_bg()</a></td>
+	<td class="summary">Get the foreground color group for the current mode, good for usage with Heirline surround utility</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#filetype_color">filetype_color(self)</a></td>
+	<td class="summary">Get the foreground color group for the current filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_attributes">get_attributes(name, include_bg)</a></td>
+	<td class="summary">Merge the color and attributes from user settings for a given name</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_icon">file_icon(name)</a></td>
+	<td class="summary">Enable filetype color highlight if enabled in icon<em>highlights.file</em>icon options</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "lualine_mode"></a>
+    <strong>lualine_mode(mode, fallback)</strong>
+    </dt>
+    <dd>
+    Get the highlight background color of the lualine theme for the current colorscheme
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mode</span>
+         string the neovim mode to get the color of
+        </li>
+        <li><span class="parameter">fallback</span>
+         string the color to fallback on if a lualine theme is not present
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # The background color of the lualine theme or the fallback parameter if one doesn't exist
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "mode"></a>
+    <strong>mode()</strong>
+    </dt>
+    <dd>
+    Get the highlight for the current mode
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # the highlight group for the current mode
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.mode },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "mode_bg"></a>
+    <strong>mode_bg()</strong>
+    </dt>
+    <dd>
+    Get the foreground color group for the current mode, good for usage with Heirline surround utility
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the highlight group for the current mode foreground
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"heirline.utils"</span>).<span class="function-name">surround</span>({ <span class="string">"|"</span>, <span class="string">"|"</span> }, <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.mode_bg, heirline_component),</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "filetype_color"></a>
+    <strong>filetype_color(self)</strong>
+    </dt>
+    <dd>
+    Get the foreground color group for the current filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # the highlight group for the current filetype foreground
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">fileicon</span>(), hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.filetype_color },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "get_attributes"></a>
+    <strong>get_attributes(name, include_bg)</strong>
+    </dt>
+    <dd>
+    Merge the color and attributes from user settings for a given name
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         string, the name of the element to get the attributes and colors for
+        </li>
+        <li><span class="parameter">include_bg</span>
+        ? boolean whether or not to include background color (Default: false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # a table of highlight information
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.<span class="function-name">get_attributes</span>(<span class="string">"treesitter"</span>) },</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_icon"></a>
+    <strong>file_icon(name)</strong>
+    </dt>
+    <dd>
+    Enable filetype color highlight if enabled in icon<em>highlights.file</em>icon options
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         string the icon<em>highlights.file</em>icon table element
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # for setting hl property in a component
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="string">"Example Provider"</span>, hl = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).hl.<span class="function-name">file_icon</span>(<span class="string">"winbar"</span>) },</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-06-11 15:17:55 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

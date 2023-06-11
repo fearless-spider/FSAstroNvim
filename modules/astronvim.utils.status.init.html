@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.component.html">astronvim.utils.status.component</a></li>
+  <li><a href="../modules/astronvim.utils.status.condition.html">astronvim.utils.status.condition</a></li>
+  <li><a href="../modules/astronvim.utils.status.env.html">astronvim.utils.status.env</a></li>
+  <li><a href="../modules/astronvim.utils.status.heirline.html">astronvim.utils.status.heirline</a></li>
+  <li><a href="../modules/astronvim.utils.status.hl.html">astronvim.utils.status.hl</a></li>
+  <li><strong>astronvim.utils.status.init</strong></li>
+  <li><a href="../modules/astronvim.utils.status.provider.html">astronvim.utils.status.provider</a></li>
+  <li><a href="../modules/astronvim.utils.status.utils.html">astronvim.utils.status.utils</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.status.init</code></h1>
+<p>
+<h3>AstroNvim Status Initializers</h3>
+</p>
+<p> Statusline related init functions for building dynamic statusline components</p>
+
+<p> This module can be loaded with <code>local init = require &quot;astronvim.utils.status.init&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2023</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#breadcrumbs">breadcrumbs(opts)</a></td>
+	<td class="summary">An <a href="../modules/astronvim.utils.status.init.html">init</a> function to build a set of children components for LSP breadcrumbs</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#separated_path">separated_path(opts)</a></td>
+	<td class="summary">An <a href="../modules/astronvim.utils.status.init.html">init</a> function to build a set of children components for a separated path to file</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#update_events">update_events(opts)</a></td>
+	<td class="summary">An <a href="../modules/astronvim.utils.status.init.html">init</a> function to build multiple update events which is not supported yet by Heirline's update field</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "breadcrumbs"></a>
+    <strong>breadcrumbs(opts)</strong>
+    </dt>
+    <dd>
+    An <a href="../modules/astronvim.utils.status.init.html">init</a> function to build a set of children components for LSP breadcrumbs
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table # options for configuring the breadcrumbs (default: <code>{ max_depth = 5, separator = &quot;  &quot;, icon = { enabled = true, hl = false }, padding = { left = 0, right = 0 } }</code>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # The Heirline init function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.<span class="function-name">breadcrumbs</span> { padding = { left = <span class="number">1</span> } } }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "separated_path"></a>
+    <strong>separated_path(opts)</strong>
+    </dt>
+    <dd>
+    An <a href="../modules/astronvim.utils.status.init.html">init</a> function to build a set of children components for a separated path to file
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring the breadcrumbs (default: <code>{ max_depth = 3, path_func = provider.unique_path(), separator = &quot;  &quot;, suffix = true, padding = { left = 0, right = 0 } }</code>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # The Heirline init function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.<span class="function-name">separated_path</span> { padding = { left = <span class="number">1</span> } } }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "update_events"></a>
+    <strong>update_events(opts)</strong>
+    </dt>
+    <dd>
+    An <a href="../modules/astronvim.utils.status.init.html">init</a> function to build multiple update events which is not supported yet by Heirline's update field
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         any[] an array like table of autocmd events as either just a string or a table with custom patterns and callbacks.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # The Heirline init function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { init = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).init.<span class="function-name">update_events</span> { <span class="string">"BufEnter"</span>, { <span class="string">"User"</span>, pattern = <span class="string">"LspProgressUpdate"</span> } } }</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-06-11 15:17:55 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

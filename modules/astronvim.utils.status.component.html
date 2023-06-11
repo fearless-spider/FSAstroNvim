@@ -1,0 +1,661 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><strong>astronvim.utils.status.component</strong></li>
+  <li><a href="../modules/astronvim.utils.status.condition.html">astronvim.utils.status.condition</a></li>
+  <li><a href="../modules/astronvim.utils.status.env.html">astronvim.utils.status.env</a></li>
+  <li><a href="../modules/astronvim.utils.status.heirline.html">astronvim.utils.status.heirline</a></li>
+  <li><a href="../modules/astronvim.utils.status.hl.html">astronvim.utils.status.hl</a></li>
+  <li><a href="../modules/astronvim.utils.status.init.html">astronvim.utils.status.init</a></li>
+  <li><a href="../modules/astronvim.utils.status.provider.html">astronvim.utils.status.provider</a></li>
+  <li><a href="../modules/astronvim.utils.status.utils.html">astronvim.utils.status.utils</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.status.component</code></h1>
+<p>
+<h3>AstroNvim Status Components</h3>
+</p>
+<p> Statusline related component functions to use with Heirline</p>
+
+<p> This module can be loaded with <code>local component = require &quot;astronvim.utils.status.component&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2023</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#fill">fill(opts)</a></td>
+	<td class="summary">A Heirline component for filling in the empty space of the bar</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_info">file_info(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an entire file information section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#tabline_file_info">tabline_file_info(opts)</a></td>
+	<td class="summary">A function with different file_info defaults specifically for use in the tabline</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#nav">nav(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an entire navigation section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#cmd_info">cmd_info(opts)</a></td>
+	<td class="summary">A function to build a set of children components for information shown in the cmdline</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#mode">mode(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a mode section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#breadcrumbs">breadcrumbs(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an LSP breadcrumbs section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#separated_path">separated_path(opts)</a></td>
+	<td class="summary">A function to build a set of children components for the current file path</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#git_branch">git_branch(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a git branch section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#git_diff">git_diff(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a git difference section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#diagnostics">diagnostics(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a diagnostics section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#treesitter">treesitter(opts)</a></td>
+	<td class="summary">A function to build a set of children components for a Treesitter section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#lsp">lsp(opts)</a></td>
+	<td class="summary">A function to build a set of children components for an LSP section</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#foldcolumn">foldcolumn(opts)</a></td>
+	<td class="summary">A function to build a set of components for a foldcolumn section in a statuscolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#numbercolumn">numbercolumn(opts)</a></td>
+	<td class="summary">A function to build a set of components for a numbercolumn section in statuscolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#signcolumn">signcolumn(opts)</a></td>
+	<td class="summary">A function to build a set of components for a signcolumn section in statuscolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#builder">builder(opts)</a></td>
+	<td class="summary">A general function to build a section of astronvim status providers with highlights, conditions, and section surrounding</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "fill"></a>
+    <strong>fill(opts)</strong>
+    </dt>
+    <dd>
+    A Heirline component for filling in the empty space of the bar
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring the other fields of the heirline component
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">fill</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_info"></a>
+    <strong>file_info(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an entire file information section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring file<em>icon, filename, filetype, file</em>modified, file<em>read</em>only, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">file_info</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "tabline_file_info"></a>
+    <strong>tabline_file_info(opts)</strong>
+    </dt>
+    <dd>
+    A function with different file_info defaults specifically for use in the tabline
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring file<em>icon, filename, filetype, file</em>modified, file<em>read</em>only, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">tabline_file_info</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "nav"></a>
+    <strong>nav(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an entire navigation section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring ruler, percentage, scrollbar, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">nav</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "cmd_info"></a>
+    <strong>cmd_info(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for information shown in the cmdline
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring macro recording, search count, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">cmd_info</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "mode"></a>
+    <strong>mode(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a mode section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring mode_text, paste, spell, and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">mode</span> { mode_text = <span class="keyword">true</span> }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "breadcrumbs"></a>
+    <strong>breadcrumbs(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an LSP breadcrumbs section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring breadcrumbs and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">breadcumbs</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "separated_path"></a>
+    <strong>separated_path(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for the current file path
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring path and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">separated_path</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "git_branch"></a>
+    <strong>git_branch(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a git branch section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring git branch and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">git_branch</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "git_diff"></a>
+    <strong>git_diff(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a git difference section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring git changes and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">git_diff</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "diagnostics"></a>
+    <strong>diagnostics(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a diagnostics section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring diagnostic providers and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">diagnostics</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "treesitter"></a>
+    <strong>treesitter(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for a Treesitter section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring diagnostic providers and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">treesitter</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "lsp"></a>
+    <strong>lsp(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of children components for an LSP section
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring lsp progress and client_name providers and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">lsp</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "foldcolumn"></a>
+    <strong>foldcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of components for a foldcolumn section in a statuscolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring foldcolumn and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">foldcolumn</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "numbercolumn"></a>
+    <strong>numbercolumn(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of components for a numbercolumn section in statuscolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring numbercolumn and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">numbercolumn</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "signcolumn"></a>
+    <strong>signcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A function to build a set of components for a signcolumn section in statuscolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for configuring signcolumn and the overall padding
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).component.<span class="function-name">signcolumn</span>()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "builder"></a>
+    <strong>builder(opts)</strong>
+    </dt>
+    <dd>
+    A general function to build a section of astronvim status providers with highlights, conditions, and section surrounding
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table a list of components to build into a section
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table # The Heirline component table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).components.<span class="function-name">builder</span>({ { provider = <span class="string">"file_icon"</span>, opts = { padding = { right = <span class="number">1</span> } } }, { provider = <span class="string">"filename"</span> } })</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-06-11 15:17:55 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

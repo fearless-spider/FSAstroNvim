@@ -1,0 +1,1190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>AstroNvim API</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>AstroNvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/astronvim.bootstrap.html">astronvim.bootstrap</a></li>
+  <li><a href="../modules/astronvim.utils.buffer.html">astronvim.utils.buffer</a></li>
+  <li><a href="../modules/astronvim.utils.git.html">astronvim.utils.git</a></li>
+  <li><a href="../modules/astronvim.utils.html">astronvim.utils</a></li>
+  <li><a href="../modules/astronvim.utils.lsp.html">astronvim.utils.lsp</a></li>
+  <li><a href="../modules/astronvim.utils.mason.html">astronvim.utils.mason</a></li>
+  <li><a href="../modules/astronvim.utils.status.component.html">astronvim.utils.status.component</a></li>
+  <li><a href="../modules/astronvim.utils.status.condition.html">astronvim.utils.status.condition</a></li>
+  <li><a href="../modules/astronvim.utils.status.env.html">astronvim.utils.status.env</a></li>
+  <li><a href="../modules/astronvim.utils.status.heirline.html">astronvim.utils.status.heirline</a></li>
+  <li><a href="../modules/astronvim.utils.status.hl.html">astronvim.utils.status.hl</a></li>
+  <li><a href="../modules/astronvim.utils.status.init.html">astronvim.utils.status.init</a></li>
+  <li><strong>astronvim.utils.status.provider</strong></li>
+  <li><a href="../modules/astronvim.utils.status.utils.html">astronvim.utils.status.utils</a></li>
+  <li><a href="../modules/astronvim.utils.ui.html">astronvim.utils.ui</a></li>
+  <li><a href="../modules/astronvim.utils.updater.html">astronvim.utils.updater</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>astronvim.utils.status.provider</code></h1>
+<p>
+<h3>AstroNvim Status Providers</h3>
+</p>
+<p> Statusline related provider functions for building statusline components</p>
+
+<p> This module can be loaded with <code>local provider = require &quot;astronvim.utils.status.provider&quot;</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2023</li>
+        <li><strong>License</strong>: GNU General Public License v3.0</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#fill">fill()</a></td>
+	<td class="summary">A provider function for the fill string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#signcolumn">signcolumn(opts)</a></td>
+	<td class="summary">A provider function for the signcolumn string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#numbercolumn">numbercolumn(opts)</a></td>
+	<td class="summary">A provider function for the numbercolumn string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#foldcolumn">foldcolumn(opts)</a></td>
+	<td class="summary">A provider function for building a foldcolumn</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#tabnr">tabnr()</a></td>
+	<td class="summary">A provider function for the current tab numbre</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#spell">spell(opts)</a></td>
+	<td class="summary">A provider function for showing if spellcheck is on</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#paste">paste(opts)</a></td>
+	<td class="summary">A provider function for showing if paste is enabled</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#macro_recording">macro_recording(opts)</a></td>
+	<td class="summary">A provider function for displaying if a macro is currently being recorded</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#showcmd">showcmd(opts)</a></td>
+	<td class="summary">A provider function for displaying the current command</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#search_count">search_count(opts)</a></td>
+	<td class="summary">A provider function for displaying the current search count</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#mode_text">mode_text(opts)</a></td>
+	<td class="summary">A provider function for showing the text of the current vim mode</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#percentage">percentage(opts)</a></td>
+	<td class="summary">A provider function for showing the percentage of the current location in a document</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ruler">ruler(opts)</a></td>
+	<td class="summary">A provider function for showing the current line and character in a document</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#scrollbar">scrollbar(opts)</a></td>
+	<td class="summary">A provider function for showing the current location as a scrollbar</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#close_button">close_button(opts)</a></td>
+	<td class="summary">A provider to simply show a close button icon</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#filetype">filetype(opts)</a></td>
+	<td class="summary">A provider function for showing the current filetype</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#filename">filename(opts)</a></td>
+	<td class="summary">A provider function for showing the current filename</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_encoding">file_encoding(opts)</a></td>
+	<td class="summary">A provider function for showing the current file encoding</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_format">file_format(opts)</a></td>
+	<td class="summary">A provider function for showing the current file format</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unique_path">unique_path(opts)</a></td>
+	<td class="summary">Get a unique filepath between all buffers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_modified">file_modified(opts)</a></td>
+	<td class="summary">A provider function for showing if the current file is modifiable</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_read_only">file_read_only(opts)</a></td>
+	<td class="summary">A provider function for showing if the current file is read-only</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#file_icon">file_icon(opts)</a></td>
+	<td class="summary">A provider function for showing the current filetype icon</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#git_branch">git_branch(opts)</a></td>
+	<td class="summary">A provider function for showing the current git branch</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#git_diff">git_diff(opts)</a></td>
+	<td class="summary">A provider function for showing the current git diff count of a specific type</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#diagnostics">diagnostics(opts)</a></td>
+	<td class="summary">A provider function for showing the current diagnostic count of a specific severity</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#lsp_progress">lsp_progress(opts)</a></td>
+	<td class="summary">A provider function for showing the current progress of loading language servers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#lsp_client_names">lsp_client_names(opts)</a></td>
+	<td class="summary">A provider function for showing the connected LSP client names</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#treesitter_status">treesitter_status(opts)</a></td>
+	<td class="summary">A provider function for showing if treesitter is connected</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#str">str(opts)</a></td>
+	<td class="summary">A provider function for displaying a single string</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "fill"></a>
+    <strong>fill()</strong>
+    </dt>
+    <dd>
+    A provider function for the fill string
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the statusline string for filling the empty space
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.fill }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "signcolumn"></a>
+    <strong>signcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for the signcolumn string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the statuscolumn string for adding the signcolumn
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.signcolumn }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "numbercolumn"></a>
+    <strong>numbercolumn(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for the numbercolumn string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the statuscolumn string for adding the numbercolumn
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.numbercolumn }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "foldcolumn"></a>
+    <strong>foldcolumn(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for building a foldcolumn
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # a custom foldcolumn function for the statuscolumn that doesn't show the nest levels
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.foldcolumn }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "tabnr"></a>
+    <strong>tabnr()</strong>
+    </dt>
+    <dd>
+    A provider function for the current tab numbre
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the statusline function to return a string for a tab number
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">tabnr</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "spell"></a>
+    <strong>spell(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if spellcheck is on
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting if spell is enabled
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">spell</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "paste"></a>
+    <strong>paste(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if paste is enabled
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting if paste is enabled
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">paste</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "macro_recording"></a>
+    <strong>macro_recording(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying if a macro is currently being recorded
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table a prefix before the recording register and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # a function that returns a string of the current recording status
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">macro_recording</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "showcmd"></a>
+    <strong>showcmd(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying the current command
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table of options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the statusline string for showing the current command
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">showcmd</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "search_count"></a>
+    <strong>search_count(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying the current search count
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for <code>vim.fn.searchcount</code> and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # a function that returns a string of the current search location
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">search_count</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "mode_text"></a>
+    <strong>mode_text(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the text of the current vim mode
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for padding the text and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for displaying the text of the current vim mode
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">mode_text</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "percentage"></a>
+    <strong>percentage(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the percentage of the current location in a document
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for Top/Bot text, fixed width, and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the statusline string for displaying the percentage of current document location
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">percentage</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ruler"></a>
+    <strong>ruler(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current line and character in a document
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for padding the line and character locations and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the statusline string for showing location in document line<em>num:char</em>num
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">ruler</span>({ pad_ruler = { line = <span class="number">3</span>, char = <span class="number">2</span> } }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "scrollbar"></a>
+    <strong>scrollbar(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current location as a scrollbar
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the scrollbar
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">scrollbar</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "close_button"></a>
+    <strong>close_button(opts)</strong>
+    </dt>
+    <dd>
+    A provider to simply show a close button icon
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function and the kind of icon to use
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the stylized icon
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">close_button</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "filetype"></a>
+    <strong>filetype(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current filetype
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function  # the function for outputting the filetype
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">filetype</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "filename"></a>
+    <strong>filename(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current filename
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for argument to fnamemodify to format filename and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the filename
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">filename</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_encoding"></a>
+    <strong>file_encoding(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current file encoding
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function  # the function for outputting the file encoding
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_encoding</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_format"></a>
+    <strong>file_format(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current file format
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function  # the function for outputting the file format
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_format</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "unique_path"></a>
+    <strong>unique_path(opts)</strong>
+    </dt>
+    <dd>
+    Get a unique filepath between all buffers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for function to get the buffer name, a buffer number, max length, and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # path to file that uniquely identifies each buffer
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">unique_path</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_modified"></a>
+    <strong>file_modified(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if the current file is modifiable
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the indicator if the file is modified
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_modified</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_read_only"></a>
+    <strong>file_read_only(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if the current file is read-only
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the indicator if the file is read-only
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_read_only</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "file_icon"></a>
+    <strong>file_icon(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current filetype icon
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the filetype icon
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">file_icon</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "git_branch"></a>
+    <strong>git_branch(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current git branch
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the git branch
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">git_branch</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "git_diff"></a>
+    <strong>git_diff(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current git diff count of a specific type
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for type of git diff and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function|nil # the function for outputting the git diff
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">git_diff</span>({ <span class="global">type</span> = <span class="string">"added"</span> }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "diagnostics"></a>
+    <strong>diagnostics(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current diagnostic count of a specific severity
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+         table options for severity of diagnostic and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function|nil # the function for outputting the diagnostic count
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">diagnostics</span>({ severity = <span class="string">"ERROR"</span> }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "lsp_progress"></a>
+    <strong>lsp_progress(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the current progress of loading language servers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the LSP progress
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">lsp_progress</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "lsp_client_names"></a>
+    <strong>lsp_client_names(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing the connected LSP client names
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options for explanding null_ls clients, max width percentage, and options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # the function for outputting the LSP client names
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">lsp_client_names</span>({ expand_null_ls = <span class="keyword">true</span>, truncate = <span class="number">0.25</span> }) }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "treesitter_status"></a>
+    <strong>treesitter_status(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for showing if treesitter is connected
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function # function for outputting TS if treesitter is connected
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">treesitter_status</span>() }</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "str"></a>
+    <strong>str(opts)</strong>
+    </dt>
+    <dd>
+    A provider function for displaying a single string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">opts</span>
+        ? table options passed to the stylize function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string # the stylized statusline string
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/astronvim.utils.status.utils.html#stylize">astronvim.utils.status.utils.stylize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> heirline_component = { provider = <span class="global">require</span>(<span class="string">"astronvim.utils.status"</span>).provider.<span class="function-name">str</span>({ str = <span class="string">"Hello"</span> }) }</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-06-11 15:17:55 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
